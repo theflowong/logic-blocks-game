@@ -3,9 +3,9 @@ var ctx = canvas.getContext("2d");
 
 const SCALE = 16; // const: constant; do not update/change scale
 
-/* ---------------
------World object (for grid)
---------------- */
+/* ------------------------------
+-----World object (for grid)-----
+------------------------------ */
 function World(w, h) {
   this.width = w;
   this.height = h;
@@ -24,9 +24,9 @@ function World(w, h) {
 
 }
 
-/* ----------
------Wall-----
----------- */
+/* ------------------------------
+---------------Wall---------------
+------------------------------ */
 function Wall() {
 }
 
@@ -40,7 +40,9 @@ Wall.prototype.draw = function(ctx, x, y) {
 
 
 
-
+/* ------------------------------
+---------------Game---------------
+------------------------------ */
 function drawGame() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
