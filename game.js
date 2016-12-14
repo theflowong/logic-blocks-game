@@ -1,6 +1,7 @@
 var canvas = document.getElementById("game");
 var ctx = canvas.getContext("2d");
 
+var world = new World(50, 50);
 const SCALE = 16; // const: constant; do not update/change scale
 
 /* ------------------------------
@@ -19,9 +20,26 @@ function World(w, h) {
     }
   }
 
+  // set up walls
+  this.grid[5][10] = new Wall();
+
+
+  // set up player interaction
+
+  // set up start and finish
 
 
 
+}
+
+World.prototype.draw = function(ctx) {
+  for (var i = 0; i < this.width; i++) {
+    for (var j = 0; j < this.height; j++) {
+      if (this.grid[i][j]) { // check to see if square is not null
+        this.grid[i][j].draw(ctx, i*SCALE, j*SCALE);
+      }
+    }
+  }
 }
 
 /* ------------------------------
@@ -46,11 +64,7 @@ Wall.prototype.draw = function(ctx, x, y) {
 function drawGame() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-
-
-  // random drawing testing
-  ctx.fillStyle = "rgb(" + Math.floor(Math.random()*200) + ",0,0)";
-  ctx.fillRect(0, 0, 10, Math.random()*50);
+  world.draw(ctx);
 
   window.requestAnimationFrame(drawGame);
 }
