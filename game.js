@@ -23,8 +23,10 @@ function World(w, h) {
   // set up walls
   this.grid[5][10] = new Wall();
 
+  // set up goomba walls
 
   // set up player interaction
+  this.grid[4][5] = new Player();
 
   // set up start and finish
 
@@ -32,6 +34,17 @@ function World(w, h) {
 
 }
 
+// check event inputs, see if player can move
+// accepts x, y
+World.prototype.turn = function(input) {
+  for (var i = 0; i < this.width; i++) {
+    for (var j = 0; j < this.height; j++) {
+      if (this.grid[i][j] && this.grid[i][j].turn) { // check that there exists a turn
+        this.grid[i][j].turn(this, i, j, input);
+      }
+    }
+  }
+}
 World.prototype.draw = function(ctx) {
   for (var i = 0; i < this.width; i++) {
     for (var j = 0; j < this.height; j++) {
@@ -40,6 +53,12 @@ World.prototype.draw = function(ctx) {
       }
     }
   }
+}
+World.prototype.swap = function(oldx, oldy, newx, newy) {
+  var item1 = this.grid[oldx][oldy];
+  var item2 = this.grid[newx][newy];
+  this.grid[oldx][oldy] = item2;
+  this.grid[newx][newy] = item1;
 }
 
 /* ------------------------------
@@ -56,11 +75,49 @@ Wall.prototype.draw = function(ctx, x, y) {
 }
 
 
+/* ------------------------------
+---------------Player---------------
+------------------------------ */
+function Player(x, y) {
+  this.x = x;
+  this.y = y;
+}
+
+Player.prototype.moveLeft = function() {
+  this.x -= 1;
+}
+
+Player.prototype.moveRight = function() {
+  this.x += 1;
+}
+
+Player.prototype.moveUp = function() {
+  this.y -= 1;
+}
+
+Player.prototype.moveDown = function() {
+  this.y += 1;
+}
+
+Player.prototype.draw = function(ctx) {
+  ctx.fillStyle = "rgb(50,50,50)";
+  ctx.fillRect(this.x, thix.y, SCALE, SCALE);
+}
+
+Player.prototype.turn = function(world, x, y, input) {
+  world.swap(x, y, x, y+1);
+}
+
 
 
 /* ------------------------------
 ---------------Game---------------
 ------------------------------ */
+
+// get input
+
+
+// draw game
 function drawGame() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
