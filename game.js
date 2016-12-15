@@ -12,13 +12,7 @@ function World(w, h) {
   this.height = h;
 
   // initialize 2d array of objects
-  this.grid = [];
-  for (var i = 0; i < w; i++) {
-    this.grid[i] = [];
-    for (var j = 0; j < h; j++) {
-      this.grid[i][j] = null;
-    }
-  }
+  this.grid = generateMaze(w, h);
 
   // set up walls
   this.grid[5][10] = new Wall();
@@ -29,9 +23,69 @@ function World(w, h) {
   this.grid[4][5] = new Player();
 
   // set up start and finish
+}
 
+// finds adjacent tiles to x and y
+function adj(x, y, w, h) {
+  return [
+    [x + 1, y],
+    [x - 1, y],
+    [x, y + 1],
+    [x, y - 1],
+  ].filter(function(pos) {
+    return pos[0] >= 0 && pos[0] < w && pos[1] >= 0 && pos[1] < h;
+  });
+}
 
+function generateMaze(w, h) {
+  var grid = [];
+  for (var i = 0; i < w; i++) {
+    grid[i] = [];
+    for (var j = 0; j < h; j++) {
+      grid[i][j] = new Wall();
+    }
+  }
+  console.log(grid);
 
+  var path = [];
+  var curx = 5;
+  var cury = 5;
+  grid[5][5] = null;
+  for (var j = 0; j < 10000; j++) {
+    console.log("foo:" + curx + " " + cury);
+    var possible = adj(curx, cury, w, h).filter(function(pos) {
+      if (grid[pos[0]][pos[1]] === null) {
+        return false;
+      }
+      var adjs = adj(pos[0], pos[1], w, h);
+      for (var i = 0; i < adjs.length; i++) {
+        var square = adjs[i];
+        if (square[0] == curx && square[1] == cury) {
+          // back to current square, so do nothing
+        } else if (grid[square[0]][square[1]] === null) {
+          // this square is a null item, so it's empty, so we can't carve out the square at position `pos`
+          return false;
+        }
+      }
+      return true;
+    });
+
+    if (possible.length > 0) {
+      var dir = possible[Math.floor(Math.random() * possible.length)];
+      path.push([curx, cury]);
+      curx = dir[0];
+      cury = dir[1];
+      grid[curx][cury] = null;
+    } else {
+      if (path.length === 0) {
+        return grid;
+      }
+      var newdir = path.pop();
+      curx = newdir[0];
+      cury = newdir[1];
+    }
+  }
+  return grid;
 }
 
 // check event inputs, see if player can move
