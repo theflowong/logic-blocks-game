@@ -78,34 +78,16 @@ Wall.prototype.draw = function(ctx, x, y) {
 /* ------------------------------
 ---------------Player---------------
 ------------------------------ */
-function Player(x, y) {
-  this.x = x;
-  this.y = y;
+function Player() {
 }
 
-Player.prototype.moveLeft = function() {
-  this.x -= 1;
-}
-
-Player.prototype.moveRight = function() {
-  this.x += 1;
-}
-
-Player.prototype.moveUp = function() {
-  this.y -= 1;
-}
-
-Player.prototype.moveDown = function() {
-  this.y += 1;
-}
-
-Player.prototype.draw = function(ctx) {
+Player.prototype.draw = function(ctx, x, y) {
   ctx.fillStyle = "rgb(50,50,50)";
-  ctx.fillRect(this.x, thix.y, SCALE, SCALE);
+  ctx.fillRect(x, y, SCALE, SCALE);
 }
 
 Player.prototype.turn = function(world, x, y, input) {
-  world.swap(x, y, x, y+1);
+  world.swap(x, y, x, y-1);
 }
 
 
@@ -114,7 +96,10 @@ Player.prototype.turn = function(world, x, y, input) {
 ---------------Game---------------
 ------------------------------ */
 
-// get input
+// get input (key code)
+window.addEventListener('keydown', function(event) {
+  world.turn(event.keyCode);
+})
 
 
 // draw game
