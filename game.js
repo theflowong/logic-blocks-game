@@ -67,6 +67,9 @@ World.prototype.swap = function(oldx, oldy, newx, newy) {
   this.grid[oldx][oldy] = item2;
   this.grid[newx][newy] = item1;
 }
+World.prototype.isEmpty = function(x, y) {
+  return (this.grid[x][y] === null);
+}
 
 /* ------------------------------
 ---------------Wall---------------
@@ -115,7 +118,9 @@ Player.prototype.turn = function(world, x, y, input) { // input is keyCode
       newy++;
     break;
   }
-  world.swap(x, y, newx, newy);
+  if (world.isEmpty(newx, newy)) {
+    world.swap(x, y, newx, newy);
+  }
 }
 
 
