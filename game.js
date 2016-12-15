@@ -89,12 +89,33 @@ function Player() {
 }
 
 Player.prototype.draw = function(ctx, x, y) {
-  ctx.fillStyle = "rgb(50,50,50)";
+  ctx.fillStyle = "rgb(200,120,0)";
   ctx.fillRect(x, y, SCALE, SCALE);
 }
 
-Player.prototype.turn = function(world, x, y, input) {
-  world.swap(x, y, x, y+1);
+Player.prototype.turn = function(world, x, y, input) { // input is keyCode
+
+  var newx = x;
+  var newy = y;
+
+  switch (input) {
+    case 37: // left
+      newx--;
+    break;
+
+    case 38: // up
+      newy--;
+    break;
+
+    case 39: // right
+      newx++;
+    break;
+
+    case 40: // down
+      newy++;
+    break;
+  }
+  world.swap(x, y, newx, newy);
 }
 
 
