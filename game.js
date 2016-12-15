@@ -37,10 +37,17 @@ function World(w, h) {
 // check event inputs, see if player can move
 // accepts x, y
 World.prototype.turn = function(input) {
+  copy = [] // make copy of this.grid
+  for (var i = 0; i < this.width; i++) {
+    copy[i] = [];
+    for (var j = 0; j < this.height; j++) {
+      copy[i][j] = this.grid[i][j];
+    }
+  }
   for (var i = 0; i < this.width; i++) {
     for (var j = 0; j < this.height; j++) {
-      if (this.grid[i][j] && this.grid[i][j].turn) { // check that there exists a turn
-        this.grid[i][j].turn(this, i, j, input);
+      if (copy[i][j] && copy[i][j].turn) { // check that there exists a turn
+        copy[i][j].turn(this, i, j, input);
       }
     }
   }
@@ -87,7 +94,7 @@ Player.prototype.draw = function(ctx, x, y) {
 }
 
 Player.prototype.turn = function(world, x, y, input) {
-  world.swap(x, y, x, y-1);
+  world.swap(x, y, x, y+1);
 }
 
 
