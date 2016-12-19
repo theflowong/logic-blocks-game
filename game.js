@@ -76,6 +76,8 @@ World.prototype.turn = function(input) {
   }
 }
 World.prototype.draw = function(ctx) {
+  ctx.fillStyle = "rgb(237,237,237)";
+  ctx.fillRect(0, 0, this.width * SCALE, this.height * SCALE);
   for (var i = 0; i < this.width; i++) {
     for (var j = 0; j < this.height; j++) {
       if (this.grid[i][j]) { // check to see if square is not null
@@ -103,7 +105,7 @@ function Wall() {
 Wall.prototype.draw = function(ctx, x, y) {
   // define functions inside prototype (only creates one instance of function)
   // ctx is a global variable
-  ctx.fillStyle = "rgb(0,0, " + Math.floor(Math.random()*200) + ")";
+  ctx.fillStyle = "rgb(100,150,100)";
   ctx.fillRect(x, y, SCALE, SCALE);
 }
 
