@@ -47,17 +47,22 @@ function generateWalls(w, h) {
     }
   }
 
-  const room_size = 7;
-  for (var roomX = 0; roomX < w - room_size; roomX += room_size) {
-    for (var roomY = 0; roomY < h - room_size; roomY += room_size) {
+  const SIZE = 7;
+  const room_count_w = Math.floor(w / SIZE);
+  const room_count_h = Math.floor(h / SIZE);
+  for (var roomY = 0; roomY < room_count_h; roomY++) {
+    // guarantee at least one room in each row has a hole up
+    var bottomHole = randInt(0, room_count_w);
+    for (var roomX = 0; roomX < room_count_w; roomX++) {
       if (roomX !== 0) {
-        grid[roomX][randInt(roomY+1, roomY + room_size)] = null;
+        grid[roomX*SIZE][randInt(roomY*SIZE+1, roomY*SIZE + SIZE)] = null;
       }
-      if (roomY !== 0) {
-        grid[randInt(roomX+1, roomX + room_size)][roomY] = null;
+      // if room is either guaranteed hole up, or if some small chance, punch a hole upward
+      if (roomY !== 0 && (bottomHole === roomX || randInt(0, 8) === 0)) {
+        grid[randInt(roomX*SIZE+1, roomX*SIZE + SIZE)][roomY*SIZE] = null;
       }
-      for (var holeX = roomX + 1; holeX < roomX + room_size; holeX++) {
-        for (var holeY = roomY + 1; holeY < roomY + room_size; holeY++) {
+      for (var holeX = roomX*SIZE + 1; holeX < roomX*SIZE + SIZE; holeX++) {
+        for (var holeY = roomY*SIZE + 1; holeY < roomY*SIZE + SIZE; holeY++) {
           grid[holeX][holeY] = null;
         }
       }
