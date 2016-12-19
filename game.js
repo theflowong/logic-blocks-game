@@ -4,6 +4,10 @@ var ctx = canvas.getContext("2d");
 var world = new World(50, 50);
 const SCALE = 16; // const: constant; do not update/change scale
 
+function randInt(low, high) {
+  return Math.floor(Math.random()*(high-low)+low);
+}
+
 /* ------------------------------
 -----World object (for grid)-----
 ------------------------------ */
@@ -12,7 +16,7 @@ function World(w, h) {
   this.height = h;
 
   // initialize 2d array of objects
-  this.grid = generateMaze(w, h);
+  this.grid = generateWalls(w, h);
 
   // set up goomba walls
 
@@ -34,7 +38,7 @@ function adj(x, y, w, h) {
   });
 }
 
-function generateMaze(w, h) {
+function generateWalls(w, h) {
   var grid = [];
   for (var i = 0; i < w; i++) {
     grid[i] = [];
@@ -46,6 +50,12 @@ function generateMaze(w, h) {
   const room_size = 7;
   for (var roomX = 0; roomX < w - room_size; roomX += room_size) {
     for (var roomY = 0; roomY < h - room_size; roomY += room_size) {
+      if (roomX !== 0) {
+        grid[roomX][randInt(roomY+1, roomY + room_size)] = null;
+      }
+      if (roomY !== 0) {
+        grid[randInt(roomX+1, roomX + room_size)][roomY] = null;
+      }
       for (var holeX = roomX + 1; holeX < roomX + room_size; holeX++) {
         for (var holeY = roomY + 1; holeY < roomY + room_size; holeY++) {
           grid[holeX][holeY] = null;
