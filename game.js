@@ -33,7 +33,7 @@ function adj(x, y, w, h) {
     [x - 1, y],
     [x, y + 1],
     [x, y - 1],
-  ].filter(function(pos) {
+  ].filter(function(pos) { // filters for tiles that are contained in the grid
     return pos[0] >= 0 && pos[0] < w && pos[1] >= 0 && pos[1] < h;
   });
 }
