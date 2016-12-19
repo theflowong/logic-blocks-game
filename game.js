@@ -14,9 +14,6 @@ function World(w, h) {
   // initialize 2d array of objects
   this.grid = generateMaze(w, h);
 
-  // set up walls
-  this.grid[5][10] = new Wall();
-
   // set up goomba walls
 
   // set up player interaction
@@ -45,46 +42,18 @@ function generateMaze(w, h) {
       grid[i][j] = new Wall();
     }
   }
-  console.log(grid);
 
-  var path = [];
-  var curx = 5;
-  var cury = 5;
-  grid[5][5] = null;
-  for (var j = 0; j < 10000; j++) {
-    console.log("foo:" + curx + " " + cury);
-    var possible = adj(curx, cury, w, h).filter(function(pos) {
-      if (grid[pos[0]][pos[1]] === null) {
-        return false;
-      }
-      var adjs = adj(pos[0], pos[1], w, h);
-      for (var i = 0; i < adjs.length; i++) {
-        var square = adjs[i];
-        if (square[0] == curx && square[1] == cury) {
-          // back to current square, so do nothing
-        } else if (grid[square[0]][square[1]] === null) {
-          // this square is a null item, so it's empty, so we can't carve out the square at position `pos`
-          return false;
+  const room_size = 7;
+  for (var roomX = 0; roomX < w - room_size; roomX += room_size) {
+    for (var roomY = 0; roomY < h - room_size; roomY += room_size) {
+      for (var holeX = roomX + 1; holeX < roomX + room_size; holeX++) {
+        for (var holeY = roomY + 1; holeY < roomY + room_size; holeY++) {
+          grid[holeX][holeY] = null;
         }
       }
-      return true;
-    });
-
-    if (possible.length > 0) {
-      var dir = possible[Math.floor(Math.random() * possible.length)];
-      path.push([curx, cury]);
-      curx = dir[0];
-      cury = dir[1];
-      grid[curx][cury] = null;
-    } else {
-      if (path.length === 0) {
-        return grid;
-      }
-      var newdir = path.pop();
-      curx = newdir[0];
-      cury = newdir[1];
     }
   }
+
   return grid;
 }
 
