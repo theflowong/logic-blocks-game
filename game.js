@@ -21,6 +21,7 @@ function World(w, h) {
 
   // set up goomba walls
   this.grid[5][5] = new Goomba();
+  this.grid[2][2] = new Goomba();
 
   // set up player interaction
   this.grid[4][5] = new Player();
@@ -45,7 +46,13 @@ function generateWalls(w, h) {
   for (var i = 0; i < w; i++) {
     grid[i] = [];
     for (var j = 0; j < h; j++) {
-      grid[i][j] = new Wall();
+      // experimenting with where to put Goomba walls
+      if (randInt(0,3) === 0) {
+        grid[i][j] = new Goomba();
+      }
+      else {
+        grid[i][j] = new Wall();
+      }
     }
   }
 
@@ -72,6 +79,15 @@ function generateWalls(w, h) {
       // if room is either guaranteed hole up, or if some small chance, punch a hole upward in horizontal wall
       if (roomY !== 0 && (bottomHole === roomX || randInt(0, 8) === 0)) {
         grid[randInt(roomX*SIZE+1, roomX*SIZE + SIZE)][roomY*SIZE] = null;
+      }
+    }
+  }
+
+  // generate Goomba blocks IN rooms
+  for (var i = 0; i < w; i++) {
+    for (var j = 0; j < h; j++) {
+      if (randInt(0, 5) === 0 && grid[i][j] === null) {
+        grid[i][j] = new Goomba();
       }
     }
   }
