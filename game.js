@@ -4,6 +4,7 @@ var ctx = canvas.getContext("2d");
 var world = new World(50, 50);
 const SCALE = 16; // const: constant; do not update/change scale
 
+// returns a random integer between two given integers
 function randInt(low, high) {
   return Math.floor(Math.random()*(high-low)+low);
 }
@@ -19,6 +20,7 @@ function World(w, h) {
   this.grid = generateWalls(w, h);
 
   // set up goomba walls
+  this.grid[5][5] = new Goomba();
 
   // set up player interaction
   this.grid[4][5] = new Player();
@@ -124,6 +126,23 @@ Wall.prototype.draw = function(ctx, x, y) {
   ctx.fillRect(x, y, SCALE, SCALE);
 }
 
+/* ------------------------------
+----------Goomba Wall----------
+------------------------------ */
+function Goomba() {
+}
+
+// same as wall... possible extension?
+Goomba.prototype.draw = function(ctx, x, y) {
+  ctx.fillStyle = "rgb(130,120,140)";
+  ctx.fillRect(x, y, SCALE, SCALE);
+}
+
+/*Goomba.prototype.turn = function(world, x, y, input) {
+  if (world.isEmpty(newx, newy)) {
+    world.swap(x, y, newx, newy);
+  }
+}*/
 
 /* ------------------------------
 ---------------Player---------------
