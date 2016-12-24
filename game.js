@@ -56,20 +56,27 @@ function generateWalls(w, h) {
     // guarantee at least one room in each row has a hole up
     var bottomHole = randInt(0, room_count_w);
     for (var roomX = 0; roomX < room_count_w; roomX++) {
+
+      // generate room by punching large holes out
+      for (var holeX = roomX*SIZE + 1; holeX < roomX*SIZE + SIZE; holeX++) {
+        for (var holeY = roomY*SIZE + 1; holeY < roomY*SIZE + SIZE; holeY++) {
+          if (randInt(0, 8) !== 0) { // for random walls within room
+            grid[holeX][holeY] = null;
+          }
+        }
+      }
+      // punch holes in vertical walls
       if (roomX !== 0) {
         grid[roomX*SIZE][randInt(roomY*SIZE+1, roomY*SIZE + SIZE)] = null;
       }
-      // if room is either guaranteed hole up, or if some small chance, punch a hole upward
+      // if room is either guaranteed hole up, or if some small chance, punch a hole upward in horizontal wall
       if (roomY !== 0 && (bottomHole === roomX || randInt(0, 8) === 0)) {
         grid[randInt(roomX*SIZE+1, roomX*SIZE + SIZE)][roomY*SIZE] = null;
       }
-      for (var holeX = roomX*SIZE + 1; holeX < roomX*SIZE + SIZE; holeX++) {
-        for (var holeY = roomY*SIZE + 1; holeY < roomY*SIZE + SIZE; holeY++) {
-          grid[holeX][holeY] = null;
-        }
-      }
     }
   }
+
+  //
 
   return grid;
 }
