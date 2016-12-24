@@ -112,6 +112,9 @@ World.prototype.swap = function(oldx, oldy, newx, newy) {
 World.prototype.isEmpty = function(x, y) {
   return (this.grid[x][y] === null);
 }
+World.prototype.isGoomba = function(x, y) {
+  return (this.grid[x][y] instanceof Goomba);
+}
 
 /* ------------------------------
 ---------------Wall---------------
@@ -159,26 +162,38 @@ Player.prototype.turn = function(world, x, y, input) { // input is keyCode
 
   var newx = x;
   var newy = y;
+  var gx = x;
+  var gy = y;
 
   switch (input) {
     case 37: // left
       newx--;
+      gx-=2;
     break;
 
     case 38: // up
       newy--;
+      gy-=2;
     break;
 
     case 39: // right
       newx++;
+      gx+=2;
     break;
 
     case 40: // down
       newy++;
+      gy+=2;
     break;
   }
   if (world.isEmpty(newx, newy)) {
     world.swap(x, y, newx, newy);
+  }
+  else if (world.isGoomba(newx, newy)) {
+    if (world.isEmpty(gx, gy)) {
+      world.swap(newx, newy, gx, gy);
+      world.swap(x, y, newx, newy);
+    }
   }
 }
 
