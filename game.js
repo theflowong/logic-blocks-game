@@ -1,8 +1,8 @@
 var canvas = document.getElementById("game");
 var ctx = canvas.getContext("2d");
 
-var world = new World(50, 50);
 const SCALE = 16; // const: constant; do not update/change scale
+var world = new World(canvas.width/SCALE, canvas.height/SCALE);
 
 // returns a random integer between two given integers
 function randInt(low, high) {
@@ -49,7 +49,7 @@ function generateWalls(w, h) {
     }
   }
 
-  const SIZE = 7;
+  const SIZE = 7; // size of room
   const room_count_w = Math.floor(w / SIZE);
   const room_count_h = Math.floor(h / SIZE);
   for (var roomY = 0; roomY < room_count_h; roomY++) {
