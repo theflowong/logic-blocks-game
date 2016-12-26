@@ -19,12 +19,8 @@ function World(w, h) {
   // initialize 2d array of objects
   this.grid = generateWalls(w, h);
 
-  // set up goomba walls
-  this.grid[5][5] = new Goomba();
-  this.grid[2][2] = new Goomba();
-
-  // set up player interaction
-  this.grid[4][5] = new Player();
+  // set up player (start in center)
+  this.grid[Math.floor(w/2)][Math.floor(h/2)] = new Player();
 
   // set up start and finish
 }
@@ -91,8 +87,6 @@ function generateWalls(w, h) {
       }
     }
   }
-
-  //
 
   return grid;
 }
@@ -164,12 +158,6 @@ Goomba.prototype.draw = function(ctx, x, y) {
   ctx.fillRect(x, y, SCALE, SCALE);
 }
 
-/*Goomba.prototype.turn = function(world, x, y, input) {
-  if (world.isEmpty(newx, newy)) {
-    world.swap(x, y, newx, newy);
-  }
-}*/
-
 /* ------------------------------
 ---------------Player---------------
 ------------------------------ */
@@ -230,7 +218,6 @@ Player.prototype.turn = function(world, x, y, input) { // input is keyCode
 window.addEventListener('keydown', function(event) {
   world.turn(event.keyCode);
 })
-
 
 // draw game
 function drawGame() {
