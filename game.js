@@ -219,6 +219,7 @@ Player.prototype.turn = function(world, x, y, input) { // input is keyCode
   }
   else if (world.isFinish(newx, newy)) {
     // add code here to have player "land" on finish square
+    // temporary "winning" message
     alert("Congrats! You've reached the finish.");
   }
 }
