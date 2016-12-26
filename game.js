@@ -9,6 +9,18 @@ function randInt(low, high) {
   return Math.floor(Math.random()*(high-low)+low);
 }
 
+// finds adjacent tiles to x and y
+function adj(x, y, w, h) {
+  return [
+    [x + 1, y],
+    [x - 1, y],
+    [x, y + 1],
+    [x, y - 1],
+  ].filter(function(pos) { // filters for tiles that are contained in the grid
+    return pos[0] >= 0 && pos[0] < w && pos[1] >= 0 && pos[1] < h;
+  });
+}
+
 /* ------------------------------
 -----World object (for grid)-----
 ------------------------------ */
@@ -23,18 +35,6 @@ function World(w, h) {
   this.grid[Math.floor(w/2)][Math.floor(h/2)] = new Player();
 
   // set up start and finish
-}
-
-// finds adjacent tiles to x and y
-function adj(x, y, w, h) {
-  return [
-    [x + 1, y],
-    [x - 1, y],
-    [x, y + 1],
-    [x, y - 1],
-  ].filter(function(pos) { // filters for tiles that are contained in the grid
-    return pos[0] >= 0 && pos[0] < w && pos[1] >= 0 && pos[1] < h;
-  });
 }
 
 function generateWalls(w, h) {
@@ -110,7 +110,7 @@ World.prototype.turn = function(input) {
   }
 }
 World.prototype.draw = function(ctx) {
-  ctx.fillStyle = "rgb(237,237,237)";
+  ctx.fillStyle = "rgb(237,237,237)"; // background
   ctx.fillRect(0, 0, this.width * SCALE, this.height * SCALE);
   for (var i = 0; i < this.width; i++) {
     for (var j = 0; j < this.height; j++) {
@@ -138,7 +138,6 @@ World.prototype.isGoomba = function(x, y) {
 ------------------------------ */
 function Wall() {
 }
-
 Wall.prototype.draw = function(ctx, x, y) {
   // define functions inside prototype (only creates one instance of function)
   // ctx is a global variable
@@ -151,7 +150,6 @@ Wall.prototype.draw = function(ctx, x, y) {
 ------------------------------ */
 function Goomba() {
 }
-
 // same as wall... possible extension?
 Goomba.prototype.draw = function(ctx, x, y) {
   ctx.fillStyle = "rgb(190,170,190)"; // purple
@@ -168,7 +166,6 @@ Player.prototype.draw = function(ctx, x, y) {
   ctx.fillStyle = "rgb(200,120,0)";
   ctx.fillRect(x, y, SCALE, SCALE);
 }
-
 Player.prototype.turn = function(world, x, y, input) { // input is keyCode
 
   var newx = x;
