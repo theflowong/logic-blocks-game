@@ -32,9 +32,11 @@ function World(w, h) {
   this.grid = generateWalls(w, h);
 
   // set up player (start in center)
-  this.grid[Math.floor(w/2)][Math.floor(h/2)] = new Player();
+  //this.grid[Math.floor(w/2)][Math.floor(h/2)] = new Player();
+  this.grid[w-2][h-2] = new Player();
 
   // set up start and finish
+  this.grid[w-2][h-1] = new Finish();
 }
 
 function generateWalls(w, h) {
@@ -132,7 +134,9 @@ World.prototype.isEmpty = function(x, y) {
 World.prototype.isGoomba = function(x, y) {
   return (this.grid[x][y] instanceof Goomba);
 }
-
+World.prototype.isFinish = function(x, y) {
+  return (this.grid[x][y] instanceof Finish);
+}
 /* ------------------------------
 ---------------Wall---------------
 ------------------------------ */
@@ -153,6 +157,16 @@ function Goomba() {
 // same as wall... possible extension?
 Goomba.prototype.draw = function(ctx, x, y) {
   ctx.fillStyle = "rgb(190,170,190)"; // purple
+  ctx.fillRect(x, y, SCALE, SCALE);
+}
+
+/* ------------------------------
+----------Finish Square----------
+------------------------------ */
+function Finish() {
+}
+Finish.prototype.draw = function(ctx, x, y) {
+  ctx.fillStyle = "rgb(50,50,100)";
   ctx.fillRect(x, y, SCALE, SCALE);
 }
 
@@ -203,9 +217,11 @@ Player.prototype.turn = function(world, x, y, input) { // input is keyCode
       world.swap(x, y, newx, newy);
     }
   }
+  else if (world.isFinish(newx, newy)) {
+    // add code here to have player "land" on finish square
+    alert("Congrats! You've reached the finish.");
+  }
 }
-
-
 
 /* ------------------------------
 ---------------Game---------------
