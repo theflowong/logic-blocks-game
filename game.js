@@ -160,7 +160,7 @@ function Goomba() {
 
 // same as wall... possible extension?
 Goomba.prototype.draw = function(ctx, x, y) {
-  ctx.fillStyle = "rgb(130,120,140)";
+  ctx.fillStyle = "rgb(190,170,190)"; // purple
   ctx.fillRect(x, y, SCALE, SCALE);
 }
 
