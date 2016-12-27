@@ -8,10 +8,11 @@
 - [ ] moving (either up/down) blocks that change direction when button is pressed ("UpDowns")
 
 ## Puzzles
+- [ ] escape the grid/perimeter (or to a finish tile)
 - [ ] move blocks to trap "Randoms" in specific area zone
 - [ ] move "UpDowns" to specific square/zone
-
+- [ ] color-coordinate different colored moveable blocks to their color zone
 
 ## Other ideas
 * start with one square, increase size of grid as game progresses
-* have different game stages
+* have different game stages with different tasks
