@@ -1,6 +1,4 @@
 # game
-=====
-
 by Robert Lord and Flo Wong
 
 =====
