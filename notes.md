@@ -1,10 +1,12 @@
 # In-progress Notes
 
-## Other Objects/Obstacles
+## Creatures
 - [x] Goombas: moveable blocks
 - [x] Randos: moving (random) creature blocks
   * Not moving is an option for randomized movement. Keep or delete?
 - [ ] UpDowns: moving (either up/down) blocks that change direction when button is pressed
+
+## Objects/Obstacles
 - [ ] Holes that the player can pass only when you move a block over it
 - [ ] Infinite holes that make a block disappear
 * Finish tiles
