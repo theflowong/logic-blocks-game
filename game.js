@@ -178,10 +178,11 @@ Rando.prototype.turn = function(world, x, y, input) {
   var newx = x;
   var newy = y;
 
-  var upordown = (randInt(0,2) === 0); // true or false
+  // ask question: is there a more efficient method than boolean?
+  var upordown = (randInt(0,2) === 0); // true: up, false: down
+  var xory = (randInt(0,2) === 0); // true: x, false: y
 
-  // horizontal or vertical movement
-  if (randInt(0,2) === 0) {
+  if (xory) {
     if (upordown) {
       newx++;
     }
