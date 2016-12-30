@@ -175,17 +175,17 @@ Rando.prototype.draw = function(ctx, x, y) {
   ctx.fillRect(x, y, SCALE, SCALE);
 }
 Rando.prototype.turn = function(world, x, y, input) {
-  console.log('\nrando turn');
   var newx = x;
   var newy = y;
 
   // horizontal or vertical movement
   if (randInt(0,2) === 0) {
-    newx = newx++; // randomize later
-    console.log("\nrando x ", newx);
+    console.log('\nrando x1 ', newx);
+    newx++; // randomize later
+    console.log("\nrando x2 ", newx);
   }
   else {
-    newy = newy++;
+    newy++;
     console.log("\nrando y ", newy);
 
   }
