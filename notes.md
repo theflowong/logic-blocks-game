@@ -7,6 +7,9 @@
 - [x] moving (random) creature blocks ("Randos")
   * Not moving is an option for randomized movement. Keep or delete?
 - [ ] moving (either up/down) blocks that change direction when button is pressed ("UpDowns")
+* Finish tiles
+  - [ ] player can land on finish tile
+  - [ ] brings you to next stage in game
 
 ## Puzzles
 - [ ] escape the grid/perimeter (or to a finish tile)
