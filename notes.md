@@ -4,7 +4,8 @@
 - [x] moveable blocks
 - [ ] holes that the player can pass only when you move a block over it
 - [ ] infinite holes that make a block disappear
-- [ ] moving (random) creature blocks ("Randoms")
+- [x] moving (random) creature blocks ("Randos")
+  * Not moving is an option for randomized movement. Keep or delete?
 - [ ] moving (either up/down) blocks that change direction when button is pressed ("UpDowns")
 
 ## Puzzles
