@@ -5,6 +5,7 @@ const SCALE = 16; // const: constant; do not update/change scale
 var world = new World(canvas.width/SCALE, canvas.height/SCALE);
 
 // returns a random integer between two given integers
+// (not including high number)
 function randInt(low, high) {
   return Math.floor(Math.random()*(high-low)+low);
 }
@@ -172,6 +173,25 @@ function Rando() {
 Rando.prototype.draw = function(ctx, x, y) {
   ctx.fillStyle = "rgb(80, 80, 80)";
   ctx.fillRect(x, y, SCALE, SCALE);
+}
+Rando.prototype.turn = function(world, x, y, input) {
+  console.log('\nrando turn');
+  var newx = x;
+  var newy = y;
+
+  // horizontal or vertical movement
+  if (randInt(0,2) === 0) {
+    newx = newx++; // randomize later
+    console.log("\nrando x ", newx);
+  }
+  else {
+    newy = newy++;
+    console.log("\nrando y ", newy);
+
+  }
+  if (world.isEmpty(newx, newy)) {
+    world.swap(x, y, newx, newy);
+  }
 }
 
 /* ------------------------------
