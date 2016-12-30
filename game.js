@@ -178,16 +178,24 @@ Rando.prototype.turn = function(world, x, y, input) {
   var newx = x;
   var newy = y;
 
+  var upordown = (randInt(0,2) === 0); // true or false
+
   // horizontal or vertical movement
   if (randInt(0,2) === 0) {
-    console.log('\nrando x1 ', newx);
-    newx++; // randomize later
-    console.log("\nrando x2 ", newx);
+    if (upordown) {
+      newx++;
+    }
+    else {
+      newx--;
+    }
   }
   else {
-    newy++;
-    console.log("\nrando y ", newy);
-
+    if (upordown) {
+      newy++;
+    }
+    else {
+      newy--;
+    }
   }
   if (world.isEmpty(newx, newy)) {
     world.swap(x, y, newx, newy);
