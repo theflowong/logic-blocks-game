@@ -31,6 +31,9 @@ function World(w, h) {
   // initialize 2d array of objects
   this.grid = generateWalls(w, h);
 
+  // test Rando
+  this.grid[3][3] = new Rando();
+
   // set up player (start in center)
   //this.grid[Math.floor(w/2)][Math.floor(h/2)] = new Player();
   this.grid[w-2][h-2] = new Player();
@@ -137,6 +140,7 @@ World.prototype.isGoomba = function(x, y) {
 World.prototype.isFinish = function(x, y) {
   return (this.grid[x][y] instanceof Finish);
 }
+
 /* ------------------------------
 ---------------Wall---------------
 ------------------------------ */
@@ -157,6 +161,16 @@ function Goomba() {
 // same as wall... possible extension?
 Goomba.prototype.draw = function(ctx, x, y) {
   ctx.fillStyle = "rgb(190,170,190)"; // purple
+  ctx.fillRect(x, y, SCALE, SCALE);
+}
+
+/* ------------------------------------------------------------
+----------Rando creatures (move randomly each turn)----------
+------------------------------------------------------------ */
+function Rando() {
+}
+Rando.prototype.draw = function(ctx, x, y) {
+  ctx.fillStyle = "rgb(80, 80, 80)";
   ctx.fillRect(x, y, SCALE, SCALE);
 }
 
