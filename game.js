@@ -178,26 +178,35 @@ Rando.prototype.turn = function(world, x, y, input) {
   var newx = x;
   var newy = y;
 
-  // ask question: is there a more efficient method than boolean?
   var upordown = (randInt(0,2) === 0); // true: up, false: down
   var xory = (randInt(0,2) === 0); // true: x, false: y
 
-  if (xory) {
-    if (upordown) {
-      newx++;
-    }
-    else {
-      newx--;
-    }
+  // note:
+  // switch statements dispatch immediately to cases (via indexed jump, with jump tables)
+  // if-else evaluate all conditions (hence is slower)
+  switch (xory) {
+    case true:
+      switch (upordown) {
+        case true:
+          newx++;
+          break;
+        case false:
+          newx--;
+          break;
+      }
+      break;
+    case false:
+      switch (upordown) {
+        case true:
+          newy++;
+          break;
+        case false:
+          newy--;
+          break;
+      }
+      break;
   }
-  else {
-    if (upordown) {
-      newy++;
-    }
-    else {
-      newy--;
-    }
-  }
+
   if (world.isEmpty(newx, newy)) {
     world.swap(x, y, newx, newy);
   }
