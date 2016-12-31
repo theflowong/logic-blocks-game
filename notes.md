@@ -20,9 +20,10 @@
 
 ## Puzzles
 - [ ] escape the grid/perimeter (or to a finish tile)
-- [ ] move blocks to trap "Randoms" in specific area zone
-- [ ] move "UpDowns" to specific square/zone
-- [ ] color-coordinate / organize different colored moveable blocks "Goombas" to their color zone
+- [ ] trap Randos in specific area/zone (by moving Goombas)
+- [ ] trap UpDowns in specific area/zone/square (by moving into direction-change toggle squares)
+- [ ] push colored Goombas to color zone
+- [ ] push Goombas into holes to clear board (similar to above, but Goomba will disappear)
 
 ## Other ideas
 * start with one square, increase size of grid as game progresses
