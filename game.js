@@ -9,7 +9,8 @@ var world_col = "rgb(237,237,237)"; // background, off-white
 var wall_col = "rgb(100,150,100)"; // green
 var finish_col = "rgb(50,50,100)"; // dark blue
 var goomba_col = "rgb(190,170,190)"; // purple
-var rando_col = "rgb(80, 80, 80)"; // gray
+var rando_col = "rgb(80, 180, 180)"; // gray
+var blackhole_col = "rgb(85,85,85)";
 var player_col = "rgb(200,120,0)"; // orange
 
 // returns a random integer between two given integers
@@ -71,6 +72,9 @@ function World(w, h, i) {
 
   // test Rando
   this.grid[3][3] = new Rando();
+
+  // test BlackHole
+  this.grid[w-3][w-4] = new BlackHole();
 
   // set up player (start in center)
   //this.grid[Math.floor(w/2)][Math.floor(h/2)] = new Player();
@@ -215,6 +219,16 @@ Goomba.prototype.draw = function(ctx, x, y) {
   ctx.fillRect(x, y, SCALE, SCALE);
 }
 
+/* --------------------------------------------------
+--------------------Black Holes--------------------
+-------------------------------------------------- */
+function BlackHole() {
+}
+BlackHole.prototype.draw = function(ctx, x, y) {
+  ctx.fillStyle = blackhole_col;
+  ctx.fillRect(x, y, SCALE, SCALE);
+}
+
 /* ------------------------------------------------------------
 ----------Rando creatures (move randomly each turn)----------
 ------------------------------------------------------------ */
@@ -316,6 +330,10 @@ Player.prototype.turn = function(world, x, y, input) { // input is keyCode
   else if (world.isObject(newx, newy, Goomba)) {
     if (world.isEmpty(gx, gy)) {
       world.swap(newx, newy, gx, gy);
+      world.swap(x, y, newx, newy);
+    }
+    if (world.isObject(gx, gy, BlackHole)) {
+      world.grid[newx][newy] = null;
       world.swap(x, y, newx, newy);
     }
   }
