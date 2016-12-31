@@ -2,9 +2,9 @@ var canvas = document.getElementById("game");
 var ctx = canvas.getContext("2d");
 
 const SCALE = 16; // const: constant; do not update/change scale
-var world = new World(canvas.width/SCALE, canvas.height/SCALE);
+var world = new World(canvas.width/SCALE, canvas.height/SCALE, 0);
 
-/* ---------------- COLORS --------------- */
+/* --------------------- COLORS -------------------- */
 var world_col = "rgb(237,237,237)"; // background, off-white
 var wall_col = "rgb(100,150,100)"; // green
 var finish_col = "rgb(50,50,100)"; // dark blue
@@ -30,12 +30,30 @@ function adj(x, y, w, h) {
   });
 }
 
-/* ------------------------------
------World object (for grid)-----
------------------------------- */
-function World(w, h) {
+function updateInstructions(str) {
+  document.getElementById('instructions').innerHTML = str;
+}
+function startLevel(stg) {
+  switch (stg) {
+    case 0:
+      updateInstructions('Escape the maze by pushing purple blocks!')
+      break;
+    case 1:
+      updateInstructions('Make 80% of purple blocks disappear.'); // or something
+      break;
+    default:
+      updateInstructions('Whoops, there was an error.');
+      break;
+  }
+}
+
+/* --------------------------------------------------
+---------------World object (for grid)---------------
+-------------------------------------------------- */
+function World(w, h, i) {
   this.width = w;
   this.height = h;
+  this.stage = i;
 
   // initialize 2d array of objects
   this.grid = generateWalls(w, h);
@@ -149,8 +167,10 @@ World.prototype.isObject = function(x, y, obj) {
 World.prototype.winGame = function(type) {
   switch (type) {
     case 'finish':
+      world.stage++; // move on to next level
       setTimeout(function () {
         alert("Congrats! You've reached the finish.");
+        startLevel(world.stage);
       }, 300);
       break;
     default:
@@ -161,9 +181,9 @@ World.prototype.winGame = function(type) {
   // reset screen?
 }
 
-/* ------------------------------
----------------Wall---------------
------------------------------- */
+/* --------------------------------------------------
+-------------------------Wall-------------------------
+-------------------------------------------------- */
 function Wall() {
 }
 Wall.prototype.draw = function(ctx, x, y) {
@@ -173,9 +193,9 @@ Wall.prototype.draw = function(ctx, x, y) {
   ctx.fillRect(x, y, SCALE, SCALE);
 }
 
-/* ------------------------------
-----------Goomba Wall----------
------------------------------- */
+/* --------------------------------------------------
+--------------------Goomba Wall--------------------
+-------------------------------------------------- */
 function Goomba() {
 }
 // same as wall... possible extension?
@@ -231,9 +251,9 @@ Rando.prototype.turn = function(world, x, y, input) {
   }
 }
 
-/* ------------------------------
-----------Finish Square----------
------------------------------- */
+/* --------------------------------------------------
+--------------------Finish Square--------------------
+-------------------------------------------------- */
 function Finish() {
 }
 Finish.prototype.draw = function(ctx, x, y) {
@@ -241,9 +261,9 @@ Finish.prototype.draw = function(ctx, x, y) {
   ctx.fillRect(x, y, SCALE, SCALE);
 }
 
-/* ------------------------------
----------------Player---------------
------------------------------- */
+/* --------------------------------------------------
+-------------------------Player-------------------------
+-------------------------------------------------- */
 function Player() {
 }
 
@@ -296,9 +316,9 @@ Player.prototype.turn = function(world, x, y, input) { // input is keyCode
   }
 }
 
-/* ------------------------------
----------------Game---------------
------------------------------- */
+/* --------------------------------------------------
+-------------------------Game-------------------------
+-------------------------------------------------- */
 
 // get input (key code)
 window.addEventListener('keydown', function(event) {
@@ -308,9 +328,7 @@ window.addEventListener('keydown', function(event) {
 // draw game
 function drawGame() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-
   world.draw(ctx);
-
   window.requestAnimationFrame(drawGame);
 }
 
