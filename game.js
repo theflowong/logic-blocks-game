@@ -143,11 +143,8 @@ World.prototype.swap = function(oldx, oldy, newx, newy) {
 World.prototype.isEmpty = function(x, y) {
   return (this.grid[x][y] === null);
 }
-World.prototype.isGoomba = function(x, y) {
-  return (this.grid[x][y] instanceof Goomba);
-}
-World.prototype.isFinish = function(x, y) {
-  return (this.grid[x][y] instanceof Finish);
+World.prototype.isObject = function(x, y, obj) {
+  return (this.grid[x][y] instanceof obj);
 }
 
 /* ------------------------------
@@ -271,13 +268,13 @@ Player.prototype.turn = function(world, x, y, input) { // input is keyCode
   if (world.isEmpty(newx, newy)) {
     world.swap(x, y, newx, newy);
   }
-  else if (world.isGoomba(newx, newy)) {
+  else if (world.isObject(newx, newy, Goomba)) {
     if (world.isEmpty(gx, gy)) {
       world.swap(newx, newy, gx, gy);
       world.swap(x, y, newx, newy);
     }
   }
-  else if (world.isFinish(newx, newy)) {
+  else if (world.isObject(newx, newy, Finish)) {
     world.grid[newx][newy] = null;
     world.swap(x, y, newx, newy);
     // temporary "winning" message
