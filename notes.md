@@ -13,7 +13,7 @@
 
 ## Objects/Obstacles
 - [ ] Holes that the player can pass only when you move a block over it
-- [ ] Infinite holes that make a block disappear
+- [x] BlackHoles: infinite holes that make a block disappear
 * Finish tiles
   - [ ] Player can land on finish tile
   - [ ] Brings you to next stage in game
