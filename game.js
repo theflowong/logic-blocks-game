@@ -146,6 +146,19 @@ World.prototype.isEmpty = function(x, y) {
 World.prototype.isObject = function(x, y, obj) {
   return (this.grid[x][y] instanceof obj);
 }
+World.prototype.winGame = function(type) {
+  switch (type) {
+    case 'finish':
+      setTimeout(function () {
+        alert("Congrats! You've reached the finish.");
+      }, 300);
+      break;
+    default:
+      alert("Congrats! You've won.");
+  }
+  // track any points/progress
+  // restart game or go to next level?
+}
 
 /* ------------------------------
 ---------------Wall---------------
@@ -278,7 +291,7 @@ Player.prototype.turn = function(world, x, y, input) { // input is keyCode
     world.grid[newx][newy] = null;
     world.swap(x, y, newx, newy);
     // temporary "winning" message
-    alert("Congrats! You've reached the finish.");
+    world.winGame('finish');
   }
 }
 
