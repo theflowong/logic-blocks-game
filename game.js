@@ -30,6 +30,17 @@ function adj(x, y, w, h) {
   });
 }
 
+
+/* --------------------------------------------------
+-------------------------Stages-------------------------
+-------------------------------------------------- */
+// ? need a function for stage??
+// need to flesh this out, consult with robert
+function Stage(name, instructions) {
+  this.name = name;
+  this.instructions = instructions;
+}
+
 function updateInstructions(str) {
   document.getElementById('instructions').innerHTML = str;
 }
