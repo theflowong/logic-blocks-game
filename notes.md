@@ -23,7 +23,7 @@
 - [ ] trap Randos in specific area/zone (by moving Goombas)
 - [ ] trap UpDowns in specific area/zone/square (by moving into direction-change toggle squares)
 - [ ] push colored Goombas to color zone
-- [ ] push Goombas into holes to clear board (similar to above, but Goomba will disappear)
+- [x] push Goombas into BlackHoles to clear board (similar to above, but Goomba will disappear)
 
 ## Other ideas
 * start with one square, increase size of grid as game progresses
