@@ -156,8 +156,9 @@ World.prototype.winGame = function(type) {
     default:
       alert("Congrats! You've won.");
   }
-  // track any points/progress
+  // track any points/progress/endgame
   // restart game or go to next level?
+  // reset screen?
 }
 
 /* ------------------------------
