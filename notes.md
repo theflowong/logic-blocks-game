@@ -1,5 +1,10 @@
 # In-progress Notes
 
+## Interface
+- [ ] Instructions for stage/game
+- [ ] Key/legend for color types
+- [ ] Stage accomplished notification
+
 ## Creatures
 - [x] Goombas: moveable blocks
 - [x] Randos: moving (random) creature blocks
