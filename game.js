@@ -4,6 +4,14 @@ var ctx = canvas.getContext("2d");
 const SCALE = 16; // const: constant; do not update/change scale
 var world = new World(canvas.width/SCALE, canvas.height/SCALE);
 
+/* ---------------- COLORS --------------- */
+var world_col = "rgb(237,237,237)"; // background, off-white
+var wall_col = "rgb(100,150,100)"; // green
+var finish_col = "rgb(50,50,100)"; // dark blue
+var goomba_col = "rgb(190,170,190)"; // purple
+var rando_col = "rgb(80, 80, 80)"; // gray
+var player_col = "rgb(200,120,0)"; // orange
+
 // returns a random integer between two given integers
 // (not including high number)
 function randInt(low, high) {
@@ -116,7 +124,7 @@ World.prototype.turn = function(input) {
   }
 }
 World.prototype.draw = function(ctx) {
-  ctx.fillStyle = "rgb(237,237,237)"; // background
+  ctx.fillStyle = world_col;
   ctx.fillRect(0, 0, this.width * SCALE, this.height * SCALE);
   for (var i = 0; i < this.width; i++) {
     for (var j = 0; j < this.height; j++) {
@@ -150,7 +158,7 @@ function Wall() {
 Wall.prototype.draw = function(ctx, x, y) {
   // define functions inside prototype (only creates one instance of function)
   // ctx is a global variable
-  ctx.fillStyle = "rgb(100,150,100)";
+  ctx.fillStyle = wall_col;
   ctx.fillRect(x, y, SCALE, SCALE);
 }
 
@@ -161,7 +169,7 @@ function Goomba() {
 }
 // same as wall... possible extension?
 Goomba.prototype.draw = function(ctx, x, y) {
-  ctx.fillStyle = "rgb(190,170,190)"; // purple
+  ctx.fillStyle = goomba_col;
   ctx.fillRect(x, y, SCALE, SCALE);
 }
 
@@ -171,7 +179,7 @@ Goomba.prototype.draw = function(ctx, x, y) {
 function Rando() {
 }
 Rando.prototype.draw = function(ctx, x, y) {
-  ctx.fillStyle = "rgb(80, 80, 80)";
+  ctx.fillStyle = rando_col;
   ctx.fillRect(x, y, SCALE, SCALE);
 }
 Rando.prototype.turn = function(world, x, y, input) {
@@ -218,7 +226,7 @@ Rando.prototype.turn = function(world, x, y, input) {
 function Finish() {
 }
 Finish.prototype.draw = function(ctx, x, y) {
-  ctx.fillStyle = "rgb(50,50,100)";
+  ctx.fillStyle = finish_col;
   ctx.fillRect(x, y, SCALE, SCALE);
 }
 
@@ -229,7 +237,7 @@ function Player() {
 }
 
 Player.prototype.draw = function(ctx, x, y) {
-  ctx.fillStyle = "rgb(200,120,0)";
+  ctx.fillStyle = player_col;
   ctx.fillRect(x, y, SCALE, SCALE);
 }
 Player.prototype.turn = function(world, x, y, input) { // input is keyCode
