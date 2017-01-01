@@ -73,11 +73,11 @@ function World(w, h, i) {
   // initialize 2d array of objects
   this.grid = generateWalls(w, h);
 
+  this.grid = generateBlackHoles(this.grid, w, h);
+  this.grid = generateRandos(this.grid, w, h);
+
   // test Rando
   this.grid[3][3] = new Rando();
-
-  // test BlackHole
-  this.grid[w-3][w-4] = new BlackHole();
 
   // set up player (start in center)
   //this.grid[Math.floor(w/2)][Math.floor(h/2)] = new Player();
@@ -132,7 +132,7 @@ function generateWalls(w, h) {
   // generate Goomba blocks IN rooms
   for (var i = 0; i < w; i++) {
     for (var j = 0; j < h; j++) {
-      if (randInt(0, 5) === 0 && grid[i][j] === null) {
+      if (randInt(0, 6) === 0 && grid[i][j] === null) {
         grid[i][j] = new Goomba();
       }
     }
@@ -140,7 +140,26 @@ function generateWalls(w, h) {
 
   return grid;
 }
-
+function generateBlackHoles(grid, w, h) { // randomized locations
+  for (var i = 0; i < w; i++) {
+    for (var j = 0; j < h; j++) {
+      if (randInt(0, 20) === 0 && grid[i][j] === null) {
+        grid[i][j] = new BlackHole();
+      }
+    }
+  }
+  return grid;
+}
+function generateRandos(grid, w, h) { // randomized locations
+  for (var i = 0; i < w; i++) {
+    for (var j = 0; j < h; j++) {
+      if (randInt(0, 20) === 0 && grid[i][j] === null) {
+        grid[i][j] = new Rando();
+      }
+    }
+  }
+  return grid;
+}
 // check event inputs, see if player can move
 // accepts x, y
 World.prototype.turn = function(input) {
