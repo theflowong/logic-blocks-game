@@ -9,7 +9,7 @@ var world_col = "rgb(237,237,237)"; // background, off-white
 var wall_col = "rgb(100,150,100)"; // green
 var finish_col = "rgb(50,50,100)"; // dark blue
 var goomba_col = "rgb(190,170,190)"; // purple
-var rando_col = "rgb(80, 180, 180)"; // gray
+var rando_col = "rgb(80, 180, 180)"; // teal
 var blackhole_col = "rgb(85,85,85)";
 var player_col = "rgb(200,120,0)"; // orange
 
@@ -37,6 +37,7 @@ function adj(x, y, w, h) {
 -------------------------------------------------- */
 // ? need a function for stage??
 // need to flesh this out, consult with robert
+// have an array that creates different instances of World?
 function Stage(name, instructions) {
   this.name = name;
   this.instructions = instructions;
@@ -58,6 +59,8 @@ function startLevel(stg) {
       break;
   }
 }
+
+startLevel(0);
 
 /* --------------------------------------------------
 ---------------World object (for grid)---------------
@@ -223,6 +226,7 @@ Goomba.prototype.draw = function(ctx, x, y) {
 --------------------Black Holes--------------------
 -------------------------------------------------- */
 function BlackHole() {
+  this.count = 0;
 }
 BlackHole.prototype.draw = function(ctx, x, y) {
   ctx.fillStyle = blackhole_col;
@@ -333,6 +337,8 @@ Player.prototype.turn = function(world, x, y, input) { // input is keyCode
       world.swap(x, y, newx, newy);
     }
     if (world.isObject(gx, gy, BlackHole)) {
+      world.grid[gx][gy].count++;
+      console.log(world.grid[gx][gy].count);
       world.grid[newx][newy] = null;
       world.swap(x, y, newx, newy);
     }
