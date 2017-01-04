@@ -29,6 +29,10 @@
 - [ ] push colored Goombas to color zone
 - [x] push Goombas into BlackHoles to clear board (similar to above, but Goomba will disappear)
 
+## Styles
+- [ ] blocks: rounded corners
+- [ ] blocks: padding
+
 ## Other ideas
 * start with one square, increase size of grid as game progresses
 * have different game stages with different tasks
