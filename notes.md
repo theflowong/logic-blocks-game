@@ -1,5 +1,8 @@
 # In-progress Notes
 
+## Game Design
+- [ ] Individualize each stage: name, instructions, initial settings
+
 ## Interface
 - [ ] Instructions for stage/game
 - [ ] Key/legend for color types

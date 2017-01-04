@@ -35,7 +35,6 @@ function adj(x, y, w, h) {
 /* --------------------------------------------------
 -------------------------Worlds-------------------------
 -------------------------------------------------- */
-// ? need a function for world??
 // need to flesh this out, consult with robert
 // have an array that creates different instances of Stage?
 function World() {
@@ -50,25 +49,23 @@ World.prototype.draw = function(ctx) {
 World.prototype.nextStage = function() {
   this.stage = new Stage(canvas.width/SCALE, canvas.height/SCALE, this);
 }
-
-function updateInstructions(str) {
+World.prototype.updateInstructions(str) {
   document.getElementById('instructions').innerHTML = str;
 }
-function startLevel(stg) {
+// need? look over when you're not sleep deprived.
+World.prototype.startLevel(stg) {
   switch (stg) {
     case 0:
-      updateInstructions('Escape the maze by pushing purple blocks!')
+      this.updateInstructions('Escape the maze by pushing purple blocks!')
       break;
     case 1:
-      updateInstructions('Make 80% of purple blocks disappear.'); // or something
+      this.updateInstructions('Make 80% of purple blocks disappear.'); // or something
       break;
     default:
-      updateInstructions('Whoops, there was an error.');
+      this.updateInstructions('Whoops, there was an error.');
       break;
   }
 }
-
-startLevel(0);
 
 /* --------------------------------------------------
 ---------------Stage object (for grid)---------------
@@ -83,9 +80,6 @@ function Stage(w, h, world) {
 
   this.grid = generateBlackHoles(this.grid, w, h);
   this.grid = generateRandos(this.grid, w, h);
-
-  // test Rando
-  this.grid[3][3] = new Rando();
 
   // set up player (start in center)
   //this.grid[Math.floor(w/2)][Math.floor(h/2)] = new Player();
@@ -212,10 +206,9 @@ Stage.prototype.isObject = function(x, y, obj) {
 Stage.prototype.winGame = function(type) {
   switch (type) {
     case 'finish':
-      this.world.nextStage(); // move on to next level
       setTimeout(function () {
+        this.world.nextStage(); // move on to next level
         alert("Congrats! You've reached the finish.");
-        startLevel(this.world);
       }, 300);
       break;
     default:
