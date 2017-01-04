@@ -2,10 +2,10 @@ var canvas = document.getElementById("game");
 var ctx = canvas.getContext("2d");
 
 const SCALE = 16; // const: constant; do not update/change scale
-var world = new World(canvas.width/SCALE, canvas.height/SCALE, 0);
+var world = new World();
 
 /* --------------------- COLORS -------------------- */
-var world_col = "rgb(237,237,237)"; // background, off-white
+var stage_col = "rgb(237,237,237)"; // background, off-white
 var wall_col = "rgb(100,150,100)"; // green
 var finish_col = "rgb(50,50,100)"; // dark blue
 var goomba_col = "rgb(190,170,190)"; // purple
@@ -33,14 +33,22 @@ function adj(x, y, w, h) {
 
 
 /* --------------------------------------------------
--------------------------Stages-------------------------
+-------------------------Worlds-------------------------
 -------------------------------------------------- */
-// ? need a function for stage??
+// ? need a function for world??
 // need to flesh this out, consult with robert
-// have an array that creates different instances of World?
-function Stage(name, instructions) {
-  this.name = name;
-  this.instructions = instructions;
+// have an array that creates different instances of Stage?
+function World() {
+  this.stage = new Stage(canvas.width/SCALE, canvas.height/SCALE, this);
+}
+World.prototype.turn = function(input) {
+  this.stage.turn(input);
+}
+World.prototype.draw = function(ctx) {
+  this.stage.draw(ctx);
+}
+World.prototype.nextStage = function() {
+  this.stage = new Stage(canvas.width/SCALE, canvas.height/SCALE, this);
 }
 
 function updateInstructions(str) {
@@ -63,12 +71,12 @@ function startLevel(stg) {
 startLevel(0);
 
 /* --------------------------------------------------
----------------World object (for grid)---------------
+---------------Stage object (for grid)---------------
 -------------------------------------------------- */
-function World(w, h, i) {
+function Stage(w, h, world) {
   this.width = w;
   this.height = h;
-  this.stage = i;
+  this.world = world;
 
   // initialize 2d array of objects
   this.grid = generateWalls(w, h);
@@ -162,7 +170,7 @@ function generateRandos(grid, w, h) { // randomized locations
 }
 // check event inputs, see if player can move
 // accepts x, y
-World.prototype.turn = function(input) {
+Stage.prototype.turn = function(input) {
   copy = [] // make copy of this.grid
   for (var i = 0; i < this.width; i++) {
     copy[i] = [];
@@ -178,8 +186,8 @@ World.prototype.turn = function(input) {
     }
   }
 }
-World.prototype.draw = function(ctx) {
-  ctx.fillStyle = world_col;
+Stage.prototype.draw = function(ctx) {
+  ctx.fillStyle = stage_col;
   ctx.fillRect(0, 0, this.width * SCALE, this.height * SCALE);
   for (var i = 0; i < this.width; i++) {
     for (var j = 0; j < this.height; j++) {
@@ -189,25 +197,25 @@ World.prototype.draw = function(ctx) {
     }
   }
 }
-World.prototype.swap = function(oldx, oldy, newx, newy) {
+Stage.prototype.swap = function(oldx, oldy, newx, newy) {
   var item1 = this.grid[oldx][oldy];
   var item2 = this.grid[newx][newy];
   this.grid[oldx][oldy] = item2;
   this.grid[newx][newy] = item1;
 }
-World.prototype.isEmpty = function(x, y) {
+Stage.prototype.isEmpty = function(x, y) {
   return (this.grid[x][y] === null);
 }
-World.prototype.isObject = function(x, y, obj) {
+Stage.prototype.isObject = function(x, y, obj) {
   return (this.grid[x][y] instanceof obj);
 }
-World.prototype.winGame = function(type) {
+Stage.prototype.winGame = function(type) {
   switch (type) {
     case 'finish':
-      world.stage++; // move on to next level
+      this.world.nextStage(); // move on to next level
       setTimeout(function () {
         alert("Congrats! You've reached the finish.");
-        startLevel(world.stage);
+        startLevel(this.world);
       }, 300);
       break;
     default:
@@ -261,7 +269,7 @@ Rando.prototype.draw = function(ctx, x, y) {
   ctx.fillStyle = rando_col;
   ctx.fillRect(x, y, SCALE, SCALE);
 }
-Rando.prototype.turn = function(world, x, y, input) {
+Rando.prototype.turn = function(stage, x, y, input) {
   var newx = x;
   var newy = y;
 
@@ -294,8 +302,8 @@ Rando.prototype.turn = function(world, x, y, input) {
       break;
   }
 
-  if (world.isEmpty(newx, newy)) {
-    world.swap(x, y, newx, newy);
+  if (stage.isEmpty(newx, newy)) {
+    stage.swap(x, y, newx, newy);
   }
 }
 
@@ -319,7 +327,7 @@ Player.prototype.draw = function(ctx, x, y) {
   ctx.fillStyle = player_col;
   ctx.fillRect(x, y, SCALE, SCALE);
 }
-Player.prototype.turn = function(world, x, y, input) { // input is keyCode
+Player.prototype.turn = function(stage, x, y, input) { // input is keyCode
 
   var newx = x;
   var newy = y;
@@ -347,26 +355,26 @@ Player.prototype.turn = function(world, x, y, input) { // input is keyCode
       gy+=2;
     break;
   }
-  if (world.isEmpty(newx, newy)) {
-    world.swap(x, y, newx, newy);
+  if (stage.isEmpty(newx, newy)) {
+    stage.swap(x, y, newx, newy);
   }
-  else if (world.isObject(newx, newy, Goomba)) {
-    if (world.isEmpty(gx, gy)) {
-      world.swap(newx, newy, gx, gy);
-      world.swap(x, y, newx, newy);
+  else if (stage.isObject(newx, newy, Goomba)) {
+    if (stage.isEmpty(gx, gy)) {
+      stage.swap(newx, newy, gx, gy);
+      stage.swap(x, y, newx, newy);
     }
-    if (world.isObject(gx, gy, BlackHole)) {
-      world.grid[gx][gy].count++;
-      console.log(world.grid[gx][gy].count);
-      world.grid[newx][newy] = null;
-      world.swap(x, y, newx, newy);
+    if (stage.isObject(gx, gy, BlackHole)) {
+      stage.grid[gx][gy].count++;
+      console.log(stage.grid[gx][gy].count);
+      stage.grid[newx][newy] = null;
+      stage.swap(x, y, newx, newy);
     }
   }
-  else if (world.isObject(newx, newy, Finish)) {
-    world.grid[newx][newy] = null;
-    world.swap(x, y, newx, newy);
+  else if (stage.isObject(newx, newy, Finish)) {
+    stage.grid[newx][newy] = null;
+    stage.swap(x, y, newx, newy);
     // temporary "winning" message
-    world.winGame('finish');
+    stage.winGame('finish');
   }
 }
 
