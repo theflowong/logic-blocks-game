@@ -49,11 +49,11 @@ World.prototype.draw = function(ctx) {
 World.prototype.nextStage = function() {
   this.stage = new Stage(canvas.width/SCALE, canvas.height/SCALE, this);
 }
-World.prototype.updateInstructions(str) {
+World.prototype.updateInstructions = function (str) {
   document.getElementById('instructions').innerHTML = str;
 }
 // need? look over when you're not sleep deprived.
-World.prototype.startLevel(stg) {
+World.prototype.startLevel = function(stg) {
   switch (stg) {
     case 0:
       this.updateInstructions('Escape the maze by pushing purple blocks!')
