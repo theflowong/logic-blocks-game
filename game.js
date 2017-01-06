@@ -89,14 +89,20 @@ function Stage(w, h, world) {
   this.grid[w-2][h-1] = new Finish();
 }
 
-function generateWalls(w, h) {
+function generateWalls(w, h) { // efficiency?
   var grid = [];
   for (var i = 0; i < w; i++) {
     grid[i] = [];
     for (var j = 0; j < h; j++) {
-      // experimenting with where to put Goomba walls
-      if (randInt(0,3) === 0) {
-        grid[i][j] = new Goomba();
+      // if they're not at the edge of board
+      if ((i !== 0) && (i !== w-1) && (j !== 0) && (j !== h-1)) {
+        // experimenting with where to put Goomba walls
+        if (randInt(0,3) === 0) {
+          grid[i][j] = new Goomba();
+        }
+        else {
+          grid[i][j] = new Wall();
+        }
       }
       else {
         grid[i][j] = new Wall();
@@ -352,9 +358,11 @@ Player.prototype.turn = function(stage, x, y, input) { // input is keyCode
     stage.swap(x, y, newx, newy);
   }
   else if (stage.isObject(newx, newy, Goomba)) {
-    if (stage.isEmpty(gx, gy)) {
-      stage.swap(newx, newy, gx, gy);
-      stage.swap(x, y, newx, newy);
+    if ((gx >= 0) && (gx <= (canvas.width-1))) {
+      if (stage.isEmpty(gx, gy)) {
+        stage.swap(newx, newy, gx, gy);
+        stage.swap(x, y, newx, newy);
+      }
     }
     if (stage.isObject(gx, gy, BlackHole)) {
       stage.grid[gx][gy].count++;
