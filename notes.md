@@ -22,12 +22,34 @@
   - [ ] Brings you to next stage in game
 
 ## Puzzles
-- [ ] escape the grid/perimeter (or to a finish tile)
+- [x] escape the grid/perimeter (or to a finish tile)
+  - [ ] locations for finish? randomize, or fixed
 - [ ] trap Randos in specific area/zone (by moving Goombas)
   * might be too difficult
 - [ ] trap UpDowns in specific area/zone/square (by moving into direction-change toggle squares)
 - [ ] push colored Goombas to color zone
 - [x] push Goombas into BlackHoles to clear board (similar to above, but Goomba will disappear)
+  - [ ] track Goomba counts for winning situation
+
+## Stages & Properties
+- [ ] Escape to Finish
+  * Arguments
+    * Wall
+    * BlackHole
+    * ~~NO Randos~~
+    * Finish
+- [ ] Push Goombas into BlackHoles
+  * Arguments
+    * Wall
+    * BlackHole
+    * ~~NO Randos~~
+    * ~~NO Finish~~
+- [ ] Trap Randos
+  Arguments
+    * Wall
+    * BlackHole
+    * Randos
+    * ~~NO Finish~~
 
 ## Styles
 - [ ] blocks: rounded corners
