@@ -45,7 +45,7 @@
     * ~~NO Randos~~
     * ~~NO Finish~~
 - [ ] Trap Randos
-  Arguments
+  * Arguments
     * Wall
     * BlackHole
     * Randos

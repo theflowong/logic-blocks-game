@@ -13,9 +13,9 @@ var rando_col = "rgb(80, 180, 180)"; // teal
 var blackhole_col = "rgb(85,85,85)";
 var player_col = "rgb(200,120,0)"; // orange
 
-// returns a random integer between two given integers
-// (not including high number)
 function randInt(low, high) {
+  // returns a random integer between two given integers
+  // (not including high number)
   return Math.floor(Math.random()*(high-low)+low);
 }
 
