@@ -38,7 +38,7 @@ function adj(x, y, w, h) {
 // need to flesh this out, consult with robert
 // have an array that creates different instances of Stage?
 function World() {
-  this.stage = new Stage(canvas.width/SCALE, canvas.height/SCALE, this);
+  this.stage = new Stage(canvas.width/SCALE, canvas.height/SCALE, this, true, true, 'instructions here');
 }
 World.prototype.turn = function(input) {
   this.stage.turn(input);
@@ -47,7 +47,7 @@ World.prototype.draw = function(ctx) {
   this.stage.draw(ctx);
 }
 World.prototype.nextStage = function() {
-  this.stage = new Stage(canvas.width/SCALE, canvas.height/SCALE, this);
+  this.stage = new Stage(canvas.width/SCALE, canvas.height/SCALE, this, true, true, 'instructions here');
 }
 World.prototype.updateInstructions = function (str) {
   document.getElementById('instructions').innerHTML = str;
@@ -70,7 +70,7 @@ World.prototype.startLevel = function(stg) {
 /* --------------------------------------------------
 ---------------Stage object (for grid)---------------
 -------------------------------------------------- */
-function Stage(w, h, world) {
+function Stage(w, h, world, have_rando, have_finish, instr) {
   this.width = w;
   this.height = h;
   this.world = world;
@@ -79,14 +79,18 @@ function Stage(w, h, world) {
   this.grid = generateWalls(w, h);
 
   this.grid = generateBlackHoles(this.grid, w, h);
-  this.grid = generateRandos(this.grid, w, h);
+  if (have_rando) {
+    this.grid = generateRandos(this.grid, w, h);
+  }
 
   // set up player (start in center)
   //this.grid[Math.floor(w/2)][Math.floor(h/2)] = new Player();
   this.grid[w-2][h-2] = new Player();
 
   // set up start and finish
-  this.grid[w-2][h-1] = new Finish();
+  if (have_finish) {
+    this.grid[w-2][h-1] = new Finish();
+  }
 }
 
 function generateWalls(w, h) { // efficiency?
