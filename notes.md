@@ -38,18 +38,21 @@
     * BlackHole
     * ~~NO Randos~~
     * Finish
+  * Win: when player reaches Finish
 - [ ] Push Goombas into BlackHoles
   * Arguments
     * Wall
     * BlackHole
     * ~~NO Randos~~
     * ~~NO Finish~~
+  * Win: when BlackHole reaches specific count
 - [ ] Trap Randos
   * Arguments
     * Wall
     * BlackHole
     * Randos
     * ~~NO Finish~~
+  * Win: when Rando is trapped in specific location range and has an unmoving object (wall or trapped Rando) on all sides
 
 ## Styles
 - [ ] blocks: rounded corners
