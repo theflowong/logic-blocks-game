@@ -35,10 +35,14 @@ function adj(x, y, w, h) {
 /* --------------------------------------------------
 -------------------------Worlds-------------------------
 -------------------------------------------------- */
-// need to flesh this out, consult with robert
-// have an array that creates different instances of Stage?
 function World() {
-  this.stage = new Stage(canvas.width/SCALE, canvas.height/SCALE, this, true, true, 'instructions here');
+  // efficiency? check with Robo
+  this.stage_titles = ['Start Game', 'Escape to Finish', 'Push Goombas into BlackHoles', 'Trap Randos'];
+  this.stage_instr = ['Start Game', 'Escape to Finish', 'Push Goombas into BlackHoles', 'Trap Randos'];
+  this.stage_rando = [false, false, false, true];
+  this.stage_finish = [false, true, false, false];
+  this.stage_count = 0;
+  this.stage = new Stage(canvas.width/SCALE, canvas.height/SCALE, this, true, true, this.stage_instr[this.stage_count]);
 }
 World.prototype.turn = function(input) {
   this.stage.turn(input);
@@ -47,9 +51,12 @@ World.prototype.draw = function(ctx) {
   this.stage.draw(ctx);
 }
 World.prototype.nextStage = function() {
-  this.stage = new Stage(canvas.width/SCALE, canvas.height/SCALE, this, true, true, 'instructions here');
+  this.stage_count++;
+  var count = this.stage_count;
+  this.updateInstructions(this.stage_instr[count]);
+  this.stage = new Stage(canvas.width/SCALE, canvas.height/SCALE, this, this.stage_rando[count], this.stage_finish[count], this.stage_instr[count]);
 }
-World.prototype.updateInstructions = function (str) {
+World.prototype.updateInstructions = function(str) {
   document.getElementById('instructions').innerHTML = str;
 }
 // need? look over when you're not sleep deprived.
@@ -71,26 +78,27 @@ World.prototype.startLevel = function(stg) {
 ---------------Stage object (for grid)---------------
 -------------------------------------------------- */
 function Stage(w, h, world, have_rando, have_finish, instr) {
+  // consider refactoring to limit parameters?
   this.width = w;
   this.height = h;
   this.world = world;
 
   // initialize 2d array of objects
   this.grid = generateWalls(w, h);
-
   this.grid = generateBlackHoles(this.grid, w, h);
+
   if (have_rando) {
     this.grid = generateRandos(this.grid, w, h);
   }
-
-  // set up player (start in center)
-  //this.grid[Math.floor(w/2)][Math.floor(h/2)] = new Player();
-  this.grid[w-2][h-2] = new Player();
 
   // set up start and finish
   if (have_finish) {
     this.grid[w-2][h-1] = new Finish();
   }
+
+  // set up player (start in center)
+  //this.grid[Math.floor(w/2)][Math.floor(h/2)] = new Player();
+  this.grid[w-2][h-2] = new Player();
 }
 
 function generateWalls(w, h) { // efficiency?

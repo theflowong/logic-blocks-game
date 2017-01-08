@@ -15,11 +15,13 @@
 - [ ] UpDowns: moving (either up/down) blocks that change direction when button is pressed
 
 ## Objects/Obstacles
+- [ ] Reset Stage button
+  * Only have specific number of resets (5? run out => game over)
 - [ ] Holes that the player can pass only when you move a block over it
 - [x] BlackHoles: infinite holes that make a block disappear
 * Finish tiles
   - [x] Player can land on finish tile
-  - [ ] Brings you to next stage in game
+  - [x] Brings you to next stage in game
 
 ## Puzzles
 - [x] escape the grid/perimeter (or to a finish tile)
@@ -32,22 +34,27 @@
   - [ ] track Goomba counts for winning situation
 
 ## Stages & Properties
-- [ ] Escape to Finish
-  * Arguments
+- [ ] Start Game?
+  * Press button
+- [x] Escape to Finish
+  - [x] Arguments
+    * Player: location?
     * Wall
     * BlackHole
     * ~~NO Randos~~
     * Finish
   * Win: when player reaches Finish
 - [ ] Push Goombas into BlackHoles
-  * Arguments
+  - [x] Arguments
+    * Player: location?
     * Wall
     * BlackHole
     * ~~NO Randos~~
     * ~~NO Finish~~
-  * Win: when BlackHole reaches specific count
+  - [ ] Win: when BlackHole reaches specific count
 - [ ] Trap Randos
-  * Arguments
+  - [x] Arguments
+    * Player: location?
     * Wall
     * BlackHole
     * Randos
