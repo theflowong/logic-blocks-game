@@ -43,7 +43,7 @@
     * BlackHole
     * ~~NO Randos~~
     * Finish
-  * Win: when player reaches Finish
+  - [x] Stage Complete: when player reaches Finish
 - [ ] Push Goombas into BlackHoles
   - [x] Arguments
     * Player: location?
@@ -51,7 +51,7 @@
     * BlackHole
     * ~~NO Randos~~
     * ~~NO Finish~~
-  - [ ] Win: when BlackHole reaches specific count
+  - [ ] Stage Complete: when BlackHole reaches specific count
 - [ ] Trap Randos
   - [x] Arguments
     * Player: location?
@@ -59,7 +59,7 @@
     * BlackHole
     * Randos
     * ~~NO Finish~~
-  * Win: when Rando is trapped in specific location range and has an unmoving object (wall or trapped Rando) on all sides
+  - [ ] Stage Complete: when Rando is trapped in specific location range and has an unmoving object (wall or trapped Rando) on all sides
 
 ## Styles
 - [ ] blocks: rounded corners

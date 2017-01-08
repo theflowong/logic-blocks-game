@@ -221,7 +221,8 @@ Stage.prototype.isEmpty = function(x, y) {
 Stage.prototype.isObject = function(x, y, obj) {
   return (this.grid[x][y] instanceof obj);
 }
-Stage.prototype.winGame = function(type) {
+Stage.prototype.complete = function(type) {
+  // THINK more about how this is set up
   switch (type) {
     case 'finish':
       setTimeout(function () {
@@ -387,7 +388,7 @@ Player.prototype.turn = function(stage, x, y, input) { // input is keyCode
     stage.grid[newx][newy] = null;
     stage.swap(x, y, newx, newy);
     // temporary "winning" message
-    stage.winGame('finish');
+    stage.complete('finish');
   }
 }
 
