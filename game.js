@@ -59,20 +59,6 @@ World.prototype.nextStage = function() {
 World.prototype.updateInstructions = function(str) {
   document.getElementById('instructions').innerHTML = str;
 }
-// need? look over when you're not sleep deprived.
-World.prototype.startLevel = function(stg) {
-  switch (stg) {
-    case 0:
-      this.updateInstructions('Escape the maze by pushing purple blocks!')
-      break;
-    case 1:
-      this.updateInstructions('Make 80% of purple blocks disappear.'); // or something
-      break;
-    default:
-      this.updateInstructions('Whoops, there was an error.');
-      break;
-  }
-}
 
 /* --------------------------------------------------
 ---------------Stage object (for grid)---------------
@@ -221,18 +207,12 @@ Stage.prototype.isEmpty = function(x, y) {
 Stage.prototype.isObject = function(x, y, obj) {
   return (this.grid[x][y] instanceof obj);
 }
-Stage.prototype.complete = function(type) {
+Stage.prototype.winMessage = function(str) {
   // THINK more about how this is set up
-  switch (type) {
-    case 'finish':
-      setTimeout(function () {
-        this.world.nextStage(); // move on to next level
-        alert("Congrats! You've reached the finish.");
-      }, 300);
-      break;
-    default:
-      alert("Congrats! You've won.");
-  }
+  setTimeout(function() {
+    this.world.nextStage(); // move on to next level
+    alert(str);
+  }, 300);
   // track any points/progress/endgame
   // restart game or go to next level?
   // reset screen?
@@ -388,7 +368,7 @@ Player.prototype.turn = function(stage, x, y, input) { // input is keyCode
     stage.grid[newx][newy] = null;
     stage.swap(x, y, newx, newy);
     // temporary "winning" message
-    stage.complete('finish');
+    stage.winMessage("Congrats! You've reached the finish.");
   }
 }
 
