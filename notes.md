@@ -16,10 +16,10 @@
 
 ## Objects/Obstacles
 - [ ] Reset Stage button
-  * Only have specific number of resets (5? run out => game over)
+  - [ ] Only have specific number of resets (5? run out => game over)
 - [ ] Holes that the player can pass only when you move a block over it
 - [x] BlackHoles: infinite holes that make a block disappear
-* Finish tiles
+- [x] Finish tiles
   - [x] Player can land on finish tile
   - [x] Brings you to next stage in game
 
@@ -34,8 +34,7 @@
   - [ ] track Goomba counts for winning situation
 
 ## Stages & Properties
-- [ ] Start Game?
-  * Press button
+- [ ] Start Game button?
 - [x] Escape to Finish
   - [x] Arguments
     * Player: location?
