@@ -78,7 +78,7 @@ World.prototype.nextStage = function() {
   this.stage = new Stage(canvas.width/SCALE, canvas.height/SCALE, this, stg_config);
 }
 
-// SHOULD THIS BE GLOBAL?
+// *Question. SHOULD THIS BE GLOBAL?
 // used to be function of World.prototype, and called through nextStage.
 // but need this to initialize stage?
 function updateInstructions(str) {
