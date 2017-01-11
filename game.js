@@ -31,7 +31,6 @@ function adj(x, y, w, h) {
   });
 }
 
-
 /* --------------------------------------------------
 -------------------------Worlds-------------------------
 -------------------------------------------------- */
@@ -75,10 +74,14 @@ World.prototype.draw = function(ctx) {
 World.prototype.nextStage = function() {
   this.stage_count++;
   var stg_config = this.stage_config[this.stage_count];
-  this.updateInstructions(stg_config['instr']);
+  //this.updateInstructions(stg_config['instr']);
   this.stage = new Stage(canvas.width/SCALE, canvas.height/SCALE, this, stg_config);
 }
-World.prototype.updateInstructions = function(str) {
+
+// SHOULD THIS BE GLOBAL?
+// used to be function of World.prototype, and called through nextStage.
+// but need this to initialize stage?
+function updateInstructions(str) {
   document.getElementById('instructions').innerHTML = str;
 }
 
@@ -95,6 +98,9 @@ function Stage(w, h, world, stage_config) {
   this.instr = stage_config['instr'];
   this.has_rando = stage_config['has_rando'];
   this.has_finish = stage_config['has_finish'];
+
+  // update instructions to world/GLOBAL?
+  updateInstructions(this.instr);
 
   // initialize 2d array of objects
   this.grid = generateWalls(w, h);
@@ -114,7 +120,7 @@ function Stage(w, h, world, stage_config) {
   this.grid[w-2][h-2] = new Player();
 }
 
-function generateWalls(w, h) { // efficiency?
+function generateWalls(w, h) {
   var grid = [];
   for (var i = 0; i < w; i++) {
     grid[i] = [];
