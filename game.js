@@ -1,3 +1,5 @@
+// Things to check, marked with: *Question.
+
 var canvas = document.getElementById("game");
 var ctx = canvas.getContext("2d");
 
