@@ -36,13 +36,35 @@ function adj(x, y, w, h) {
 -------------------------Worlds-------------------------
 -------------------------------------------------- */
 function World() {
-  // efficiency? check with Robo
-  this.stage_titles = ['Start Game', 'Escape to Finish', 'Push Goombas into BlackHoles', 'Trap Randos'];
-  this.stage_instr = ['Start Game', 'Escape to Finish', 'Push Goombas into BlackHoles', 'Trap Randos'];
-  this.stage_rando = [false, false, false, true];
-  this.stage_finish = [false, true, false, false];
+  this.stage_config = [
+    // {instructions: 'instructions here', has_rando: true, has_finish: true, other_info: false},
+    {
+      title: 'Start Game',
+      instr: "This won't actually show up, but I'll have to fix it.",
+      has_rando: false,
+      has_finish: true
+    },
+    {
+      title: 'Escape to Finish',
+      instr: 'Escape to the finish square.',
+      has_rando: false,
+      has_finish: true
+    },
+    {
+      title: 'Push Goombas into BlackHoles',
+      instr: 'Push at least 10 Goombas into BlackHoles.',
+      has_rando: false,
+      has_finish: false
+    },
+    {
+      title: 'Trap Randos',
+      instr: "Trap the randomly moving creatures in a specific area that isn't implemented yet, therefore is impossible to complete.",
+      has_rando: true,
+      has_finish: false
+    }
+  ];
   this.stage_count = 0;
-  this.stage = new Stage(canvas.width/SCALE, canvas.height/SCALE, this, true, true, this.stage_instr[this.stage_count]);
+  this.stage = new Stage(canvas.width/SCALE, canvas.height/SCALE, this, this.stage_config[this.stage_count]);
 }
 World.prototype.turn = function(input) {
   this.stage.turn(input);
@@ -52,9 +74,9 @@ World.prototype.draw = function(ctx) {
 }
 World.prototype.nextStage = function() {
   this.stage_count++;
-  var count = this.stage_count;
-  this.updateInstructions(this.stage_instr[count]);
-  this.stage = new Stage(canvas.width/SCALE, canvas.height/SCALE, this, this.stage_rando[count], this.stage_finish[count], this.stage_instr[count]);
+  var stg_config = this.stage_config[this.stage_count];
+  this.updateInstructions(stg_config['instr']);
+  this.stage = new Stage(canvas.width/SCALE, canvas.height/SCALE, this, stg_config);
 }
 World.prototype.updateInstructions = function(str) {
   document.getElementById('instructions').innerHTML = str;
@@ -63,22 +85,27 @@ World.prototype.updateInstructions = function(str) {
 /* --------------------------------------------------
 ---------------Stage object (for grid)---------------
 -------------------------------------------------- */
-function Stage(w, h, world, have_rando, have_finish, instr) {
+function Stage(w, h, world, stage_config) {
   // consider refactoring to limit parameters?
   this.width = w;
   this.height = h;
   this.world = world;
 
+  this.title = stage_config['title'];
+  this.instr = stage_config['instr'];
+  this.has_rando = stage_config['has_rando'];
+  this.has_finish = stage_config['has_finish'];
+
   // initialize 2d array of objects
   this.grid = generateWalls(w, h);
   this.grid = generateBlackHoles(this.grid, w, h);
 
-  if (have_rando) {
+  if (this.has_rando) {
     this.grid = generateRandos(this.grid, w, h);
   }
 
   // set up start and finish
-  if (have_finish) {
+  if (this.has_finish) {
     this.grid[w-2][h-1] = new Finish();
   }
 
