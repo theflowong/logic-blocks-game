@@ -40,20 +40,14 @@ function World() {
   this.stage_config = [
     // {instructions: 'instructions here', has_rando: true, has_finish: true, other_info: false},
     {
-      title: 'Start Game',
-      instr: "This won't actually show up, but I'll have to fix it.",
-      has_rando: false,
-      has_finish: true
-    },
-    {
       title: 'Escape to Finish',
-      instr: 'Escape to the finish square.',
+      instr: 'Escape the board! Hint: look at the border.',
       has_rando: false,
       has_finish: true
     },
     {
       title: 'Push Goombas into BlackHoles',
-      instr: 'Push at least 10 Goombas into BlackHoles.',
+      instr: 'Make some Goombas and BlackHoles vanish off the board.',
       has_rando: false,
       has_finish: false
     },
@@ -393,10 +387,16 @@ Player.prototype.turn = function(stage, x, y, input) { // input is keyCode
       }
     }
     if (stage.isObject(gx, gy, BlackHole)) {
-      stage.grid[gx][gy].count++;
-      console.log(stage.grid[gx][gy].count);
+      var hole = stage.grid[gx][gy];
+      hole.count++;
+      console.log(hole.count);
       stage.grid[newx][newy] = null;
       stage.swap(x, y, newx, newy);
+
+      if (hole.count > 0 && world.stage_count === 1) {
+        stage.winMessage("Nice, you've disposed of some Goombas in a selfish pursuit for your own space. On to the next stage!");
+      }
+
     }
   }
   else if (stage.isObject(newx, newy, Finish)) {

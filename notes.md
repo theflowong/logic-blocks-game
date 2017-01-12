@@ -32,6 +32,7 @@
 - [ ] push colored Goombas to color zone
 - [x] push Goombas into BlackHoles to clear board (similar to above, but Goomba will disappear)
   - [ ] track Goomba counts for winning situation
+  - [ ] make BlackHoles disappear with more Goombas
 
 ## Stages & Properties
 - [ ] Start Game button?
