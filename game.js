@@ -113,9 +113,11 @@ function Stage(w, h, world, stage_config) {
     this.grid[w-2][h-1] = new Finish();
   }
 
-  // set up player (start in center)
-  //this.grid[Math.floor(w/2)][Math.floor(h/2)] = new Player();
-  this.grid[w-2][h-2] = new Player();
+  // set up player (start in center?)
+  this.grid[Math.floor(w/2)][Math.floor(h/2)] = new Player();
+
+  // for testing purposes: easy access to finish
+  //this.grid[w-2][h-2] = new Player();
 }
 
 function generateWalls(w, h) {
