@@ -49,7 +49,7 @@ function World() {
     },
     {
       title: 'Push Goombas into BlackHoles',
-      instr: 'Make some Goombas and BlackHoles vanish off the board.',
+      instr: 'Vanish a BlackHole. Hint: try some pushing some stuff into each other.',
       has_rando: false,
       has_finish: false
     },
