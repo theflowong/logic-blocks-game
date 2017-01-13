@@ -4,15 +4,9 @@
 - [ ] Individualize each stage: name, instructions, initial settings
 
 ## Interface
-- [ ] Instructions for stage/game
+- [x] Instructions for stage/game
 - [ ] Key/legend for color types
 - [ ] Stage accomplished notification
-
-## Creatures
-- [x] Goombas: moveable blocks
-- [x] Randos: moving (random) creature blocks
-  * Not moving is an option for randomized movement. Keep or delete?
-- [ ] UpDowns: moving (either up/down) blocks that change direction when button is pressed
 
 ## Objects/Obstacles
 - [ ] Reset Stage button
@@ -23,6 +17,12 @@
   - [x] Player can land on finish tile
   - [x] Brings you to next stage in game
 
+  ## Creatures
+  - [x] Goombas: moveable blocks
+  - [x] Randos: moving (random) creature blocks
+    * Not moving is an option for randomized movement. Keep or delete?
+  - [ ] UpDowns: moving (either up/down) blocks that change direction when button is pressed
+
 ## Puzzles
 - [x] escape the grid/perimeter (or to a finish tile)
   - [ ] locations for finish? randomize, or fixed
@@ -31,11 +31,11 @@
 - [ ] trap UpDowns in specific area/zone/square (by moving into direction-change toggle squares)
 - [ ] push colored Goombas to color zone
 - [x] push Goombas into BlackHoles to clear board (similar to above, but Goomba will disappear)
-  - [ ] track Goomba counts for winning situation
-  - [ ] make BlackHoles disappear with more Goombas
+  - [x] track Goomba counts for winning situation
+  - [x] make BlackHoles gradually disappear (more transparent) with more Goombas
 
 ## Stages & Properties
-- [ ] Start Game button?
+- [ ] Start Game button? first stage is wonky, things not initialized?
 - [x] Escape to Finish
   - [x] Arguments
     * Player: location?
