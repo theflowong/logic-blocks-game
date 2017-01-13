@@ -9,7 +9,7 @@
 - [ ] Stage accomplished notification
 
 ## Objects/Obstacles
-- [ ] Reset Stage button
+- [x] Reset Stage button
   - [ ] Only have specific number of resets (5? run out => game over)
 - [ ] Holes that the player can pass only when you move a block over it
 - [x] BlackHoles: infinite holes that make a block disappear

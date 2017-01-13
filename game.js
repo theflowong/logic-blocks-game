@@ -1,4 +1,5 @@
 // Things to check, marked with: *Question.
+// Things to do, marked with: *DO LATER:
 
 var canvas = document.getElementById("game");
 var ctx = canvas.getContext("2d");
@@ -69,11 +70,15 @@ World.prototype.turn = function(input) {
 World.prototype.draw = function(ctx) {
   this.stage.draw(ctx);
 }
+World.prototype.resetStage = function() {
+  // *Question. Should resetStage function be in World? i think so, but check when not sleep deprived hehhe.
+  this.stage = new Stage(canvas.width/SCALE, canvas.height/SCALE, this, this.stage_config[this.stage_count]);
+}
 World.prototype.nextStage = function() {
   this.stage_count++;
   var stg_config = this.stage_config[this.stage_count];
-  //this.updateInstructions(stg_config['instr']);
   this.stage = new Stage(canvas.width/SCALE, canvas.height/SCALE, this, stg_config);
+  // *DO LATER: possibly replace ^above with resetStage function? for efficiency. experiment more.
 }
 
 // *Question. SHOULD THIS BE GLOBAL?
@@ -113,11 +118,11 @@ function Stage(w, h, world, stage_config) {
     this.grid[w-2][h-1] = new Finish();
   }
 
-  // set up player (start in center?)
-  this.grid[Math.floor(w/2)][Math.floor(h/2)] = new Player();
+  // set up player (start in center? maybe random?)
+  //this.grid[Math.floor(w/2)][Math.floor(h/2)] = new Player();
 
   // for testing purposes: easy access to finish
-  //this.grid[w-2][h-2] = new Player();
+  this.grid[w-2][h-2] = new Player();
 }
 
 function generateWalls(w, h) {
@@ -422,6 +427,24 @@ Player.prototype.turn = function(stage, x, y, input) { // input is keyCode
     stage.winMessage("Congrats! You've reached the finish.");
   }
 }
+
+/* --------------------- RESET STAGE -------------------- */
+
+var reset_button = document.getElementById('reset-stage');
+reset_button.onclick = function() {
+  world.resetStage();
+};
+
+// *Question. Use above instead of eventListener?
+/*
+if (reset_button.addEventListener) {
+  console.log('click');
+  reset_button.addEventListener('click', world.resetStage(), false);
+}
+else if (reset_button.attachEvent) {
+  reset_button.attachEvent('onlick', world.resetStage());
+}
+*/
 
 /* --------------------------------------------------
 -------------------------Game-------------------------
