@@ -12,7 +12,9 @@ var wall_col = "rgb(100,150,100)"; // green
 var finish_col = "rgb(50,50,100)"; // dark blue
 var goomba_col = "rgb(190,170,190)"; // purple
 var rando_col = "rgb(80, 180, 180)"; // teal
-var blackhole_col = "rgb(85,85,85)";
+// var blackhole_col = "rgb(85,85,85)";
+// blackhole_col now local variable (transparency depends on goombas)
+var blackhole_cap = 2;
 var player_col = "rgb(200,120,0)"; // orange
 
 function randInt(low, high) {
@@ -179,7 +181,7 @@ function generateBlackHoles(grid, w, h) { // randomized locations
   for (var i = 0; i < w; i++) {
     for (var j = 0; j < h; j++) {
       if (randInt(0, 20) === 0 && grid[i][j] === null) {
-        grid[i][j] = new BlackHole();
+        grid[i][j] = new BlackHole(blackhole_cap);
       }
     }
   }
@@ -273,11 +275,14 @@ Goomba.prototype.draw = function(ctx, x, y) {
 /* --------------------------------------------------
 --------------------Black Holes--------------------
 -------------------------------------------------- */
-function BlackHole() {
+function BlackHole(capacity) {
   this.count = 0;
+  this.cap = capacity;
+  this.trans = 1;
+  this.color = "rgba(85,85,85,1)";
 }
 BlackHole.prototype.draw = function(ctx, x, y) {
-  ctx.fillStyle = blackhole_col;
+  ctx.fillStyle = this.color;
   ctx.fillRect(x, y, SCALE, SCALE);
 }
 
@@ -389,14 +394,23 @@ Player.prototype.turn = function(stage, x, y, input) { // input is keyCode
     if (stage.isObject(gx, gy, BlackHole)) {
       var hole = stage.grid[gx][gy];
       hole.count++;
-      console.log(hole.count);
       stage.grid[newx][newy] = null;
       stage.swap(x, y, newx, newy);
 
-      if (hole.count > 0 && world.stage_count === 1) {
-        stage.winMessage("Nice, you've disposed of some Goombas in a selfish pursuit for your own space. On to the next stage!");
-      }
+      var count = hole.count;
+      var cap = hole.cap;
+      var trans = hole.trans;
 
+      // make holes disappear gradually when you push enough goombas in it
+      trans = (cap-count)/cap;
+      hole.color = "rgba(85,85,85," + trans.toString() + ")";
+
+      if (count === cap) {
+        stage.grid[gx][gy] = null;
+        if (world.stage_count === 1) {
+          stage.winMessage("Nice, you've disposed of some Goombas in a selfish pursuit for your own space. On to the next stage!");
+        }
+      }
     }
   }
   else if (stage.isObject(newx, newy, Finish)) {
