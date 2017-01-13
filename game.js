@@ -14,7 +14,7 @@ var goomba_col = "rgb(190,170,190)"; // purple
 var rando_col = "rgb(80, 180, 180)"; // teal
 // var blackhole_col = "rgb(85,85,85)";
 // blackhole_col now local variable (transparency depends on goombas)
-var blackhole_cap = 2;
+var blackhole_cap = 4;
 var player_col = "rgb(200,120,0)"; // orange
 
 function randInt(low, high) {
