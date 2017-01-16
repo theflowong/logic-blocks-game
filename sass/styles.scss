@@ -1,0 +1,7 @@
+@import "fixing"; // combination of reset and normalize
+
+
+.game-board canvas {
+  display: block;
+  margin: 30px auto;
+}
