@@ -475,7 +475,7 @@ function StartMainMenu(ctx) {
 
   // text
   ctx.fillStyle = 'rgb(10,10,10)';
-  ctx.font = "30px Helvetica Arial";
+  ctx.font = "60px Clear Sans Arial";
   ctx.textAlign = 'center';
   ctx.strokeText('Start Game', canvas.width/2, canvas.height/2);
 
