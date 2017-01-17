@@ -450,6 +450,8 @@ else if (reset_button.attachEvent) {
 -------------------------Game-------------------------
 -------------------------------------------------- */
 
+// *Question. this whole StartMainMenu design
+
 // get input (key code)
 window.addEventListener('keydown', function(event) {
   world.turn(event.keyCode);
@@ -462,4 +464,24 @@ function drawGame() {
   window.requestAnimationFrame(drawGame);
 }
 
-window.requestAnimationFrame(drawGame);
+function StartGame() {
+  window.requestAnimationFrame(drawGame);
+}
+
+function StartMainMenu(ctx) {
+  // background
+  ctx.fillStyle = 'rgb(100,100,0)';//stage_col;
+  ctx.fillRect(0,0, canvas.width, canvas.height);
+
+  // text
+  ctx.fillStyle = 'rgb(10,10,10)';
+  ctx.font = "30px Helvetica Arial";
+  ctx.textAlign = 'center';
+  ctx.strokeText('Start Game', canvas.width/2, canvas.height/2);
+
+  window.addEventListener('click', function(event) {
+    StartGame();
+  })
+}
+
+StartMainMenu(ctx);
