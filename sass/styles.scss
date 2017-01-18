@@ -69,7 +69,7 @@ h1.title {
     background: $game-container-background;
     padding: 15px 25px;
     font-size: $height;
-    height: $height;
+    // height: $height; // only include if not button
     line-height: $height + 22px;
     font-weight: bold;
     border-radius: 3px;
