@@ -157,7 +157,7 @@ function generateWalls(w, h) {
       // generate room by punching large holes out
       for (var holeX = roomX*SIZE + 1; holeX < roomX*SIZE + SIZE; holeX++) {
         for (var holeY = roomY*SIZE + 1; holeY < roomY*SIZE + SIZE; holeY++) {
-          if (randInt(0, 8) !== 0) { // for random walls within room
+          if (randInt(0, 7) !== 0) { // for random walls within room
             grid[holeX][holeY] = null;
           }
         }
