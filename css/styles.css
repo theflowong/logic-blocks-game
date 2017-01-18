@@ -145,26 +145,49 @@ h1.title {
   float: left; }
 
 /* line 61, ../sass/styles.scss */
-.scores-container {
+.reset-container {
   float: right;
   text-align: right; }
+  /* line 66, ../sass/styles.scss */
+  .reset-container #reset-stage {
+    position: relative;
+    display: inline-block;
+    background: #9bc1bc;
+    padding: 15px 25px;
+    font-size: 25px;
+    height: 25px;
+    line-height: 47px;
+    font-weight: bold;
+    border-radius: 3px;
+    color: white;
+    margin-top: 8px;
+    text-align: center; }
 
-/* line 66, ../sass/styles.scss */
+/*
+.scores-container {
+  float: right;
+  text-align: right;
+}
+
 .score-container, .best-container {
+  $height: 25px;
+
   position: relative;
   display: inline-block;
-  background: #9bc1bc;
+  background: $game-container-background;
   padding: 15px 25px;
-  font-size: 25px;
-  height: 25px;
-  line-height: 47px;
+  font-size: $height;
+  height: $height;
+  line-height: $height + 22px;
   font-weight: bold;
   border-radius: 3px;
   color: white;
   margin-top: 8px;
-  text-align: center; }
+  text-align: center;
+}
 
-/* line 83, ../sass/styles.scss */
+*/
+/* line 107, ../sass/styles.scss */
 .game-board canvas {
   margin: 30px auto;
   border-radius: 8px; }

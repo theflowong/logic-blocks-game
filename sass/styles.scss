@@ -58,6 +58,28 @@ h1.title {
   float: left;
 }
 
+.reset-container {
+  float: right;
+  text-align: right;
+  $height: 25px;
+
+  #reset-stage {
+    position: relative;
+    display: inline-block;
+    background: $game-container-background;
+    padding: 15px 25px;
+    font-size: $height;
+    height: $height;
+    line-height: $height + 22px;
+    font-weight: bold;
+    border-radius: 3px;
+    color: white;
+    margin-top: 8px;
+    text-align: center;
+  }
+}
+
+/*
 .scores-container {
   float: right;
   text-align: right;
@@ -79,6 +101,8 @@ h1.title {
   margin-top: 8px;
   text-align: center;
 }
+
+*/
 
 .game-board canvas {
   //display: block;
