@@ -4,7 +4,7 @@
 var canvas = document.getElementById("game");
 var ctx = canvas.getContext("2d");
 
-const SCALE = 16; // const: constant; do not update/change scale
+const SCALE = 17.5; // const: constant; do not update/change scale
 var world = new World();
 
 /* --------------------- COLORS -------------------- */
@@ -146,7 +146,7 @@ function generateWalls(w, h) {
     }
   }
 
-  const SIZE = 7; // size of room
+  const SIZE = 5; // size of room
   const room_count_w = Math.floor(w / SIZE);
   const room_count_h = Math.floor(h / SIZE);
   for (var roomY = 0; roomY < room_count_h; roomY++) {

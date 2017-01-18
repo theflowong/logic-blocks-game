@@ -1,10 +1,11 @@
 # In-progress Notes
 
 ## Game Design
-- [ ] Individualize each stage: name, instructions, initial settings
+- [x] Individualize each stage: name, instructions, initial settings
 
 ## Interface
 - [x] Instructions for stage/game
+- [ ] Different color palette for each stage? possibly
 - [ ] Key/legend for color types
 - [ ] Stage accomplished notification
 

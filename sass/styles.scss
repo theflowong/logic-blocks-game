@@ -1,23 +1,77 @@
 @import "helpers"; // combination of reset and normalize
 @import "fonts/clear-sans.css";
 
-$text-color: #776E65;
+
+// possible color palette: https://coolors.co/1c283b-e3cecd-afdbe8-ebd3b0-eff4f0
+/* RGB */
+$color1: rgba(28, 40, 59, 1); // yankees blue
+$color2: rgba(227, 206, 205, 1); // dust storm
+$color3: rgba(175, 219, 232, 1); // light blue
+$color4: rgba(235, 211, 176, 1); // desert sand
+$color5: rgba(239, 244, 240, 1); // anti-flash white
+
+$text-color-light: #fff; // white ish
+$text-color-dark: #1F2D3D; // black ish
+$text-color: #9facbd; // grey
+// figure out text color
+
+$background-color: $color5;
+
+$tile-color: #edb3b0;
+
+$game-container-background: $color3; // for scores
 
 html, body {
   margin: 0;
   padding: 0;
 
-  background: #faf8ef;
+  background: $background-color;//#faf8ef;
   color: $text-color;
   font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;;
   font-size: 18px;
 }
 
 body {
-  margin: 80px 0;
+  //margin: 80px 0;
+}
+
+.container {
+  width: 280px;
+  margin: 0 auto;
+}
+
+h1.title {
+  font-size: 80px;
+  font-weight: bold;
+  margin: 0;
+  display: block;
+  float: left;
+}
+
+.scores-container {
+  float: right;
+  text-align: right;
+}
+
+.score-container, .best-container {
+  $height: 25px;
+
+  position: relative;
+  display: inline-block;
+  background: $game-container-background;
+  padding: 15px 25px;
+  font-size: $height;
+  height: $height;
+  line-height: $height + 22px;
+  font-weight: bold;
+  border-radius: 3px;
+  color: white;
+  margin-top: 8px;
+  text-align: center;
 }
 
 .game-board canvas {
   display: block;
   margin: 30px auto;
+  border-radius: 8px;
 }
