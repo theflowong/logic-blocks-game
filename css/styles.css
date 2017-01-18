@@ -114,22 +114,29 @@ button {
   border: 0;
   padding: 0; }
 
+/* RGB
+$color1: rgba(28, 40, 59, 1); // yankees blue
+$color2: rgba(227, 206, 205, 1); // dust storm
+$color3: rgba(175, 219, 232, 1); // light blue
+$color4: rgba(235, 211, 176, 1); // desert sand
+$color5: rgba(239, 244, 240, 1); // anti-flash white
+*/
 /* RGB */
-/* line 24, ../sass/styles.scss */
+/* line 34, ../sass/styles.scss */
 html, body {
   margin: 0;
   padding: 0;
-  background: #eff4f0;
+  background: #e6ebe0;
   color: #9facbd;
   font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
   font-size: 18px; }
 
-/* line 38, ../sass/styles.scss */
+/* line 48, ../sass/styles.scss */
 .container {
-  width: 280px;
+  width: 270px;
   margin: 0 auto; }
 
-/* line 43, ../sass/styles.scss */
+/* line 53, ../sass/styles.scss */
 h1.title {
   font-size: 80px;
   font-weight: bold;
@@ -137,16 +144,16 @@ h1.title {
   display: block;
   float: left; }
 
-/* line 51, ../sass/styles.scss */
+/* line 61, ../sass/styles.scss */
 .scores-container {
   float: right;
   text-align: right; }
 
-/* line 56, ../sass/styles.scss */
+/* line 66, ../sass/styles.scss */
 .score-container, .best-container {
   position: relative;
   display: inline-block;
-  background: #afdbe8;
+  background: #9bc1bc;
   padding: 15px 25px;
   font-size: 25px;
   height: 25px;
@@ -157,8 +164,7 @@ h1.title {
   margin-top: 8px;
   text-align: center; }
 
-/* line 73, ../sass/styles.scss */
+/* line 83, ../sass/styles.scss */
 .game-board canvas {
-  display: block;
   margin: 30px auto;
   border-radius: 8px; }

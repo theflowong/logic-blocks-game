@@ -4,19 +4,19 @@
 var canvas = document.getElementById("game");
 var ctx = canvas.getContext("2d");
 
-const SCALE = 17.5; // const: constant; do not update/change scale
+const SCALE = 18; // const: constant; do not update/change scale
 var world = new World();
 
 /* --------------------- COLORS -------------------- */
-var stage_col = "rgb(237,237,237)"; // background, off-white
-var wall_col = "rgb(100,150,100)"; // green
-var finish_col = "rgb(50,50,100)"; // dark blue
-var goomba_col = "rgb(190,170,190)"; // purple
+var stage_col = 'rgba(239, 244, 240, 1)'; // anti-flash white //"rgb(237,237,237)"; // background, off-white
+var wall_col = "rgba(155, 193, 188, 1)"; // cambridge blue //'rgba(227, 206, 205, 1)'; // dust storm
+var finish_col = stage_col; 'rgba(28, 40, 59, 1)'; // yankees blue
+var goomba_col = 'rgba(175, 219, 232, 1)'; // light blue //"rgb(190,170,190)"; // purple
 var rando_col = "rgb(80, 180, 180)"; // teal
 // var blackhole_col = "rgb(85,85,85)";
 // blackhole_col now local variable (transparency depends on goombas)
 var blackhole_cap = 4;
-var player_col = "rgb(200,120,0)"; // orange
+var player_col = 'rgba(235, 211, 176, 1)'; // desert sand //"rgb(200,120,0)"; // orange
 
 function randInt(low, high) {
   // returns a random integer between two given integers
@@ -146,7 +146,7 @@ function generateWalls(w, h) {
     }
   }
 
-  const SIZE = 5; // size of room
+  const SIZE = 7; // size of room
   const room_count_w = Math.floor(w / SIZE);
   const room_count_h = Math.floor(h / SIZE);
   for (var roomY = 0; roomY < room_count_h; roomY++) {
@@ -464,6 +464,8 @@ function drawGame() {
   window.requestAnimationFrame(drawGame);
 }
 
+
+/*
 function StartGame() {
   window.requestAnimationFrame(drawGame);
 }
@@ -485,3 +487,7 @@ function StartMainMenu(ctx) {
 }
 
 StartMainMenu(ctx);
+
+*/
+
+window.requestAnimationFrame(drawGame);
