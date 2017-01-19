@@ -5,7 +5,6 @@ var canvas = document.getElementById("game");
 var ctx = canvas.getContext("2d");
 
 const SCALE = 18; // const: constant; do not update/change scale
-var world = new World();
 
 /* --------------------- COLORS -------------------- */
 var stage_col = 'rgba(239, 244, 240, 1)'; // anti-flash white //"rgb(237,237,237)"; // background, off-white
@@ -17,6 +16,8 @@ var rando_col = "rgb(80, 180, 180)"; // teal
 // blackhole_col now local variable (transparency depends on goombas)
 var blackhole_cap = 4;
 var player_col = 'rgba(235, 211, 176, 1)'; // desert sand //"rgb(200,120,0)"; // orange
+
+var world = new World();
 
 function randInt(low, high) {
   // returns a random integer between two given integers
@@ -41,7 +42,6 @@ function adj(x, y, w, h) {
 -------------------------------------------------- */
 function World() {
   this.stage_config = [
-    // {instructions: 'instructions here', has_rando: true, has_finish: true, other_info: false},
     {
       title: 'Escape to Finish',
       instr: 'Escape the board! Hint: look at the border.',
@@ -250,7 +250,6 @@ Stage.prototype.isObject = function(x, y, obj) {
 Stage.prototype.winMessage = function(str) {
   // THINK more about how this is set up
   var world = this.world;
-  console.log('this.world', this.world, world);
   setTimeout(function() {
     world.nextStage(); // move on to next level
     alert(str);
@@ -410,9 +409,7 @@ Player.prototype.turn = function(stage, x, y, input) { // input is keyCode
 
       var count = hole.count;
       var cap = hole.cap;
-      console.log('cap', hole.cap);
       var trans = hole.trans;
-      console.log('trans', hole.trans);
 
       // make holes disappear gradually when you push enough goombas in it
       trans = (cap-count)/cap;
