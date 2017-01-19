@@ -190,3 +190,8 @@ h1.title {
 .game-board canvas {
   margin: 30px auto;
   border-radius: 8px; }
+
+/* line 113, ../sass/styles.scss */
+.stage-name {
+  font-style: bold;
+  color: #ed6a5a; }

@@ -84,8 +84,9 @@ World.prototype.nextStage = function() {
 // *Question. SHOULD THIS BE GLOBAL?
 // used to be function of World.prototype, and called through nextStage.
 // but need this to initialize stage?
-function updateInstructions(str) {
-  document.getElementById('instructions').innerHTML = str;
+function updateInstructions(stage_name, instr) {
+  document.getElementById('stage-name').innerHTML = stage_name;
+  document.getElementById('instructions').innerHTML = instr;
 }
 
 /* --------------------------------------------------
@@ -99,11 +100,12 @@ function Stage(w, h, world, stage_config) {
 
   this.title = stage_config['title'];
   this.instr = stage_config['instr'];
+
   this.has_rando = stage_config['has_rando'];
   this.has_finish = stage_config['has_finish'];
 
   // update instructions to world/GLOBAL?
-  updateInstructions(this.instr);
+  updateInstructions(this.title, this.instr);
 
   // initialize 2d array of objects
   this.grid = generateWalls(w, h);
@@ -119,10 +121,10 @@ function Stage(w, h, world, stage_config) {
   }
 
   // set up player (start in center? maybe random?)
-  //this.grid[Math.floor(w/2)][Math.floor(h/2)] = new Player();
+  this.grid[Math.floor(w/4)][Math.floor(h/4)] = new Player();
 
   // for testing purposes: easy access to finish
-  this.grid[w-2][h-2] = new Player();
+  //this.grid[w-2][h-2] = new Player();
 }
 
 function generateWalls(w, h) {
@@ -406,7 +408,9 @@ Player.prototype.turn = function(stage, x, y, input) { // input is keyCode
 
       var count = hole.count;
       var cap = hole.cap;
+      console.log('cap', hole.cap);
       var trans = hole.trans;
+      console.log('trans', hole.trans);
 
       // make holes disappear gradually when you push enough goombas in it
       trans = (cap-count)/cap;
