@@ -249,8 +249,10 @@ Stage.prototype.isObject = function(x, y, obj) {
 }
 Stage.prototype.winMessage = function(str) {
   // THINK more about how this is set up
+  var world = this.world;
+  console.log('this.world', this.world, world);
   setTimeout(function() {
-    this.world.nextStage(); // move on to next level
+    world.nextStage(); // move on to next level
     alert(str);
   }, 300);
   // track any points/progress/endgame
