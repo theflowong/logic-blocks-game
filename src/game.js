@@ -1,12 +1,11 @@
 // Things to check, marked with: *Question.
 // Things to do, marked with: *DO LATER:
 
+const C = require("./constants");
 const Wall = require("./wall");
 
 var canvas = document.getElementById("game");
 var ctx = canvas.getContext("2d");
-
-const SCALE = 18; // const: constant; do not update/change scale
 
 /* --------------------- COLORS -------------------- */
 var stage_col = 'rgba(239, 244, 240, 1)'; // anti-flash white //"rgb(237,237,237)"; // background, off-white
@@ -64,7 +63,7 @@ function World() {
     }
   ];
   this.stage_count = 0;
-  this.stage = new Stage(canvas.width/SCALE, canvas.height/SCALE, this, this.stage_config[this.stage_count]);
+  this.stage = new Stage(canvas.width/C.SCALE, canvas.height/C.SCALE, this, this.stage_config[this.stage_count]);
 }
 World.prototype.turn = function(input) {
   this.stage.turn(input);
@@ -74,12 +73,12 @@ World.prototype.draw = function(ctx) {
 }
 World.prototype.resetStage = function() {
   // *Question. Should resetStage function be in World? i think so, but check when not sleep deprived hehhe.
-  this.stage = new Stage(canvas.width/SCALE, canvas.height/SCALE, this, this.stage_config[this.stage_count]);
+  this.stage = new Stage(canvas.width/C.SCALE, canvas.height/C.SCALE, this, this.stage_config[this.stage_count]);
 }
 World.prototype.nextStage = function() {
   this.stage_count++;
   var stg_config = this.stage_config[this.stage_count];
-  this.stage = new Stage(canvas.width/SCALE, canvas.height/SCALE, this, stg_config);
+  this.stage = new Stage(canvas.width/C.SCALE, canvas.height/C.SCALE, this, stg_config);
   // *DO LATER: possibly replace ^above with resetStage function? for efficiency. experiment more.
 }
 
@@ -228,11 +227,11 @@ Stage.prototype.turn = function(input) {
 }
 Stage.prototype.draw = function(ctx) {
   ctx.fillStyle = stage_col;
-  ctx.fillRect(0, 0, this.width * SCALE, this.height * SCALE);
+  ctx.fillRect(0, 0, this.width * C.SCALE, this.height * C.SCALE);
   for (var i = 0; i < this.width; i++) {
     for (var j = 0; j < this.height; j++) {
       if (this.grid[i][j]) { // check to see if square is not null
-        this.grid[i][j].draw(ctx, i*SCALE, j*SCALE);
+        this.grid[i][j].draw(ctx, i*C.SCALE, j*C.SCALE);
       }
     }
   }
@@ -270,7 +269,7 @@ function Goomba() {
 // same as wall... possible extension?
 Goomba.prototype.draw = function(ctx, x, y) {
   ctx.fillStyle = goomba_col;
-  ctx.fillRect(x, y, SCALE, SCALE);
+  ctx.fillRect(x, y, C.SCALE, C.SCALE);
 }
 
 /* --------------------------------------------------
@@ -284,7 +283,7 @@ function BlackHole(capacity) {
 }
 BlackHole.prototype.draw = function(ctx, x, y) {
   ctx.fillStyle = this.color;
-  ctx.fillRect(x, y, SCALE, SCALE);
+  ctx.fillRect(x, y, C.SCALE, C.SCALE);
 }
 
 /* ------------------------------------------------------------
@@ -294,7 +293,7 @@ function Rando() {
 }
 Rando.prototype.draw = function(ctx, x, y) {
   ctx.fillStyle = rando_col;
-  ctx.fillRect(x, y, SCALE, SCALE);
+  ctx.fillRect(x, y, C.SCALE, C.SCALE);
 }
 Rando.prototype.turn = function(stage, x, y, input) {
   var newx = x;
@@ -341,7 +340,7 @@ function Finish() {
 }
 Finish.prototype.draw = function(ctx, x, y) {
   ctx.fillStyle = finish_col;
-  ctx.fillRect(x, y, SCALE, SCALE);
+  ctx.fillRect(x, y, C.SCALE, C.SCALE);
 }
 
 /* --------------------------------------------------
@@ -352,7 +351,7 @@ function Player() {
 
 Player.prototype.draw = function(ctx, x, y) {
   ctx.fillStyle = player_col;
-  ctx.fillRect(x, y, SCALE, SCALE);
+  ctx.fillRect(x, y, C.SCALE, C.SCALE);
 }
 Player.prototype.turn = function(stage, x, y, input) { // input is keyCode
 
