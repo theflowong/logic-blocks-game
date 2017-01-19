@@ -1,6 +1,8 @@
 // Things to check, marked with: *Question.
 // Things to do, marked with: *DO LATER:
 
+const Wall = require("./wall");
+
 var canvas = document.getElementById("game");
 var ctx = canvas.getContext("2d");
 
@@ -259,17 +261,6 @@ Stage.prototype.winMessage = function(str) {
   // reset screen?
 }
 
-/* --------------------------------------------------
--------------------------Wall-------------------------
--------------------------------------------------- */
-function Wall() {
-}
-Wall.prototype.draw = function(ctx, x, y) {
-  // define functions inside prototype (only creates one instance of function)
-  // ctx is a global variable
-  ctx.fillStyle = wall_col;
-  ctx.fillRect(x, y, SCALE, SCALE);
-}
 
 /* --------------------------------------------------
 --------------------Goomba Wall--------------------
