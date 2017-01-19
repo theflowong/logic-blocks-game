@@ -1,10 +1,25 @@
 # In-progress Notes
 
+======
+
+## Meeting Notes: January 19
+
+### To do
+- [ ] separate javascript files
+- [ ] change "Goombas" to "blocks"
+- [ ] make mobile friendly
+- [ ] stage 3: trap blocks (or experiment with trapping to area)
+- [ ] finish stage: add alert to canvas (instead of window.alert)
+- [ ] scores? (experiment with moves / time)
+======
+
+
 ## Game Design
 - [x] Individualize each stage: name, instructions, initial settings
 
 ## Interface
 - [x] Instructions for stage/game
+- [ ] Make accessible for mobile: swiping (Javascript library)
 - [ ] Different color palette for each stage? possibly
 - [ ] Key/legend for color types
 - [ ] Stage accomplished notification
@@ -29,6 +44,7 @@
   - [ ] locations for finish? randomize, or fixed
 - [ ] trap Randos in specific area/zone (by moving Goombas)
   * might be too difficult
+  * specific area/zone vs. just trapping them so they can't move
 - [ ] trap UpDowns in specific area/zone/square (by moving into direction-change toggle squares)
 - [ ] push colored Goombas to color zone
 - [x] push Goombas into BlackHoles to clear board (similar to above, but Goomba will disappear)
@@ -36,7 +52,7 @@
   - [x] make BlackHoles gradually disappear (more transparent) with more Goombas
 
 ## Stages & Properties
-- [ ] Start Game button? first stage is wonky, things not initialized?
+- [ ] Start Game button?
 - [x] Escape to Finish
   - [x] Arguments
     * Player: location?
@@ -45,14 +61,14 @@
     * ~~NO Randos~~
     * Finish
   - [x] Stage Complete: when player reaches Finish
-- [ ] Push Goombas into BlackHoles
+- [x] Push Goombas into BlackHoles
   - [x] Arguments
     * Player: location?
     * Wall
     * BlackHole
     * ~~NO Randos~~
     * ~~NO Finish~~
-  - [ ] Stage Complete: when BlackHole reaches specific count
+  - [x] Stage Complete: when BlackHole reaches specific count
 - [ ] Trap Randos
   - [x] Arguments
     * Player: location?
