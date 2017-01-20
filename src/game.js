@@ -3,6 +3,9 @@
 
 const C = require("./constants");
 const Wall = require("./wall");
+const Block = require('./block');
+const BlackHole = require('./blackhole');
+const Player = require("./player");
 
 var canvas = document.getElementById("game");
 var ctx = canvas.getContext("2d");
@@ -11,12 +14,11 @@ var ctx = canvas.getContext("2d");
 var stage_col = 'rgba(239, 244, 240, 1)'; // anti-flash white //"rgb(237,237,237)"; // background, off-white
 var wall_col = "rgba(155, 193, 188, 1)"; // cambridge blue //'rgba(227, 206, 205, 1)'; // dust storm
 var finish_col = stage_col; 'rgba(28, 40, 59, 1)'; // yankees blue
-var goomba_col = 'rgba(175, 219, 232, 1)'; // light blue //"rgb(190,170,190)"; // purple
+var block_col = 'rgba(175, 219, 232, 1)'; // light blue //"rgb(190,170,190)"; // purple
 var rando_col = "rgb(80, 180, 180)"; // teal
 // var blackhole_col = "rgb(85,85,85)";
-// blackhole_col now local variable (transparency depends on goombas)
+// blackhole_col now local variable (transparency depends on blocks)
 var blackhole_cap = 4;
-var player_col = 'rgba(235, 211, 176, 1)'; // desert sand //"rgb(200,120,0)"; // orange
 
 var world = new World();
 
@@ -50,7 +52,7 @@ function World() {
       has_finish: true
     },
     {
-      title: 'Push Goombas into BlackHoles',
+      title: 'Push Blocks into BlackHoles',
       instr: 'Vanish a BlackHole. Hint: try some pushing some stuff into each other.',
       has_rando: false,
       has_finish: false
@@ -135,9 +137,9 @@ function generateWalls(w, h) {
     for (var j = 0; j < h; j++) {
       // if they're not at the edge of board
       if ((i !== 0) && (i !== w-1) && (j !== 0) && (j !== h-1)) {
-        // experimenting with where to put Goomba walls
+        // experimenting with where to put Block walls
         if (randInt(0,3) === 0) {
-          grid[i][j] = new Goomba();
+          grid[i][j] = new Block();
         }
         else {
           grid[i][j] = new Wall();
@@ -176,11 +178,11 @@ function generateWalls(w, h) {
     }
   }
 
-  // generate Goomba blocks IN rooms
+  // generate Block blocks IN rooms
   for (var i = 0; i < w; i++) {
     for (var j = 0; j < h; j++) {
       if (randInt(0, 6) === 0 && grid[i][j] === null) {
-        grid[i][j] = new Goomba();
+        grid[i][j] = new Block();
       }
     }
   }
@@ -262,29 +264,14 @@ Stage.prototype.winMessage = function(str) {
 
 
 /* --------------------------------------------------
---------------------Goomba Wall--------------------
+--------------------Block Wall--------------------
 -------------------------------------------------- */
-function Goomba() {
-}
-// same as wall... possible extension?
-Goomba.prototype.draw = function(ctx, x, y) {
-  ctx.fillStyle = goomba_col;
-  ctx.fillRect(x, y, C.SCALE, C.SCALE);
-}
+
 
 /* --------------------------------------------------
 --------------------Black Holes--------------------
 -------------------------------------------------- */
-function BlackHole(capacity) {
-  this.count = 0;
-  this.cap = capacity;
-  this.trans = 1;
-  this.color = "rgba(85,85,85,1)";
-}
-BlackHole.prototype.draw = function(ctx, x, y) {
-  ctx.fillStyle = this.color;
-  ctx.fillRect(x, y, C.SCALE, C.SCALE);
-}
+
 
 /* ------------------------------------------------------------
 ----------Rando creatures (move randomly each turn)----------
@@ -341,84 +328,6 @@ function Finish() {
 Finish.prototype.draw = function(ctx, x, y) {
   ctx.fillStyle = finish_col;
   ctx.fillRect(x, y, C.SCALE, C.SCALE);
-}
-
-/* --------------------------------------------------
--------------------------Player-------------------------
--------------------------------------------------- */
-function Player() {
-}
-
-Player.prototype.draw = function(ctx, x, y) {
-  ctx.fillStyle = player_col;
-  ctx.fillRect(x, y, C.SCALE, C.SCALE);
-}
-Player.prototype.turn = function(stage, x, y, input) { // input is keyCode
-
-  var newx = x;
-  var newy = y;
-  var gx = x;
-  var gy = y;
-
-  switch (input) {
-    case 37: // left
-      newx--;
-      gx-=2;
-    break;
-
-    case 38: // up
-      newy--;
-      gy-=2;
-    break;
-
-    case 39: // right
-      newx++;
-      gx+=2;
-    break;
-
-    case 40: // down
-      newy++;
-      gy+=2;
-    break;
-  }
-  if (stage.isEmpty(newx, newy)) {
-    stage.swap(x, y, newx, newy);
-  }
-  else if (stage.isObject(newx, newy, Goomba)) {
-    if ((gx >= 0) && (gx <= (canvas.width-1))) {
-      if (stage.isEmpty(gx, gy)) {
-        stage.swap(newx, newy, gx, gy);
-        stage.swap(x, y, newx, newy);
-      }
-    }
-    if (stage.isObject(gx, gy, BlackHole)) {
-      var hole = stage.grid[gx][gy];
-      hole.count++;
-      stage.grid[newx][newy] = null;
-      stage.swap(x, y, newx, newy);
-
-      var count = hole.count;
-      var cap = hole.cap;
-      var trans = hole.trans;
-
-      // make holes disappear gradually when you push enough goombas in it
-      trans = (cap-count)/cap;
-      hole.color = "rgba(85,85,85," + trans.toString() + ")";
-
-      if (count === cap) {
-        stage.grid[gx][gy] = null;
-        if (world.stage_count === 1) {
-          stage.winMessage("Nice, you've disposed of some Goombas in a selfish pursuit for your own space. On to the next stage!");
-        }
-      }
-    }
-  }
-  else if (stage.isObject(newx, newy, Finish)) {
-    stage.grid[newx][newy] = null;
-    stage.swap(x, y, newx, newy);
-    // temporary "winning" message
-    stage.winMessage("Congrats! You've reached the finish.");
-  }
 }
 
 /* --------------------- RESET STAGE -------------------- */
