@@ -2,7 +2,6 @@ var C = require('./constants');
 var Block = require('./block');
 var BlackHole = require('./blackhole');
 var Finish = require('./finish');
-// require world
 
 function Player() {
 }

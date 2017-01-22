@@ -1,5 +1,3 @@
-// DONE
-
 var C = require('./constants');
 
 function Finish() {

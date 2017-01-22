@@ -5,8 +5,8 @@
 ## Meeting Notes: January 19
 
 ### To do
-- [ ] separate javascript files
-- [ ] change "Goombas" to "blocks"
+- [x] separate javascript files
+- [x] change "Goombas" to "blocks"
 - [ ] make mobile friendly
 - [ ] stage 3: trap blocks (or experiment with trapping to area)
 - [ ] finish stage: add alert to canvas (instead of window.alert)
@@ -41,7 +41,7 @@
 
 ## Puzzles
 - [x] escape the grid/perimeter (or to a finish tile)
-  - [ ] locations for finish? randomize, or fixed
+  - [ ] different locations for finish? randomize, or fixed
 - [ ] trap Randos in specific area/zone (by moving Goombas)
   * might be too difficult
   * specific area/zone vs. just trapping them so they can't move

@@ -1,6 +1,3 @@
-// DONE
-
-
 var C = require('./constants');
 
 function Wall() {
