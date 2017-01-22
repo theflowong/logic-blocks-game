@@ -121,14 +121,13 @@ function Stage(w, h, world, stage_config) {
 
   // set up start and finish
   if (this.has_finish) {
-    this.grid[w-2][h-1] = new Finish();
+    this.grid[randInt(1, w-1)][0] = new Finish(); // top
+    this.grid[randInt(1, w-1)][h-1] = new Finish(); // bottom
   }
 
   // set up player (start in center? maybe random?)
-  this.grid[Math.floor(w/4)][Math.floor(h/4)] = new Player();
-
-  // for testing purposes: easy access to finish
-  //this.grid[w-2][h-2] = new Player();
+  this.grid[randInt(1,w-1)][randInt(1,h-1)] = new Player();
+  //this.grid[Math.floor(w/4)][Math.floor(h/4)] = new Player(); // center
 }
 
 Stage.prototype.turn = function(world, input) {
