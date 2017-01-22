@@ -1,5 +1,6 @@
 var C = require('./constants');
 var stage = require('./stage');
+var randInt = require('./functions').randInt;
 
 function Rando() {
 }
