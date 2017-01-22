@@ -138,18 +138,21 @@ html, body {
 
 /* line 53, ../sass/styles.scss */
 h1.title {
-  font-size: 80px;
+  font-size: 35px;
   font-weight: bold;
   margin: 0;
   padding-top: 30px;
   display: block;
-  float: left; }
+  float: left;
+  text-align: center;
+  text-transform: uppercase;
+  width: 270px; }
 
-/* line 62, ../sass/styles.scss */
+/* line 65, ../sass/styles.scss */
 .reset-container {
   float: right;
   text-align: right; }
-  /* line 67, ../sass/styles.scss */
+  /* line 70, ../sass/styles.scss */
   .reset-container #reset-stage {
     position: relative;
     display: inline-block;
@@ -187,12 +190,12 @@ h1.title {
 }
 
 */
-/* line 108, ../sass/styles.scss */
+/* line 111, ../sass/styles.scss */
 .game-board canvas {
   margin: 30px auto;
   border-radius: 8px; }
 
-/* line 114, ../sass/styles.scss */
+/* line 117, ../sass/styles.scss */
 .stage-name {
   font-style: bold;
   color: #ed6a5a; }

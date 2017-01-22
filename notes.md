@@ -17,12 +17,16 @@
 ## Game Design
 - [x] Individualize each stage: name, instructions, initial settings
 
-## Interface
+## Interface & Styles
 - [x] Instructions for stage/game
+- [ ] Vertically align game to be centered
 - [ ] Make accessible for mobile: swiping (Javascript library)
 - [ ] Different color palette for each stage? possibly
 - [ ] Key/legend for color types
 - [ ] Stage accomplished notification
+  - [ ] Animate stage accomplished and moving on to next stage?
+- [ ] blocks: rounded corners (must modify in Javascript)
+- [ ] blocks: padding
 
 ## Objects/Obstacles
 - [x] Reset Stage button
@@ -41,7 +45,7 @@
 
 ## Puzzles
 - [x] escape the grid/perimeter (or to a finish tile)
-  - [ ] different locations for finish? randomize, or fixed
+  - [x] different locations for finish? **randomize**, or fixed
 - [ ] trap Randos in specific area/zone (by moving Goombas)
   * might be too difficult
   * specific area/zone vs. just trapping them so they can't move
@@ -77,10 +81,8 @@
     * Randos
     * ~~NO Finish~~
   - [ ] Stage Complete: when Rando is trapped in specific location range and has an unmoving object (wall or trapped Rando) on all sides
-
-## Styles
-- [ ] blocks: rounded corners
-- [ ] blocks: padding
+    - [ ] if Rando.isTrapped, then make Rando disappear
+    - [ ] animate disappearance of Rando
 
 ## Other ideas
 * start with one square, increase size of grid as game progresses
