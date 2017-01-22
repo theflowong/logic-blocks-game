@@ -141,14 +141,15 @@ h1.title {
   font-size: 80px;
   font-weight: bold;
   margin: 0;
+  padding-top: 30px;
   display: block;
   float: left; }
 
-/* line 61, ../sass/styles.scss */
+/* line 62, ../sass/styles.scss */
 .reset-container {
   float: right;
   text-align: right; }
-  /* line 66, ../sass/styles.scss */
+  /* line 67, ../sass/styles.scss */
   .reset-container #reset-stage {
     position: relative;
     display: inline-block;
@@ -186,12 +187,12 @@ h1.title {
 }
 
 */
-/* line 107, ../sass/styles.scss */
+/* line 108, ../sass/styles.scss */
 .game-board canvas {
   margin: 30px auto;
   border-radius: 8px; }
 
-/* line 113, ../sass/styles.scss */
+/* line 114, ../sass/styles.scss */
 .stage-name {
   font-style: bold;
   color: #ed6a5a; }
