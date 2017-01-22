@@ -65,7 +65,7 @@ Player.prototype.turn = function(stage, x, y, world, input) { // input is keyCod
       if (count === cap) {
         stage.grid[gx][gy] = null;
         if (world.stage_count === 1) {
-          stage.winMessage("Nice, you've disposed of some Goombas in a selfish pursuit for your own space. On to the next stage!");
+          stage.winMessage("Nice! You're becoming a human actor, and modifying environments to suit your needs. Next Stage.");
         }
       }
     }
@@ -74,7 +74,7 @@ Player.prototype.turn = function(stage, x, y, world, input) { // input is keyCod
     stage.grid[newx][newy] = null;
     stage.swap(x, y, newx, newy);
     // temporary "winning" message
-    stage.winMessage("Congrats! You've reached the finish.");
+    stage.winMessage("Congrats! You've escaped the trappings of society. Now you have another society to worry about!");
   }
 }
 
