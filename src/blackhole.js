@@ -1,3 +1,5 @@
+// DONE
+
 var C = require('./constants');
 
 function BlackHole(capacity) {

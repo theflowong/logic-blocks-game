@@ -1,7 +1,8 @@
 var C = require('./constants');
 var Block = require('./block');
 var BlackHole = require('./blackhole');
-// require goomba and blackhole
+var Finish = require('./finish');
+// require world
 
 function Player() {
 }
@@ -10,7 +11,7 @@ Player.prototype.draw = function(ctx, x, y) {
   ctx.fillStyle = C.player_col;
   ctx.fillRect(x, y, C.SCALE, C.SCALE);
 }
-Player.prototype.turn = function(stage, x, y, input) { // input is keyCode
+Player.prototype.turn = function(stage, x, y, world, input) { // input is keyCode
 
   var newx = x;
   var newy = y;
