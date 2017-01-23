@@ -62,19 +62,30 @@ h1.title {
   width: $game-container-width;
 }
 
+.stage-container {
+  //display: inline-block;
+}
+
+.stage-info-container {
+  width: 100px;
+  display: inline-block;
+}
+
 .reset-container {
+  width: 100px;
+  display: inline-block;
   float: right;
   text-align: right;
   $height: 25px;
 
   #reset-stage {
     position: relative;
-    display: inline-block;
+    float: right;
     background: $game-container-background;
     padding: 15px 25px;
     font-size: $height;
     // height: $height; // only include if not button
-    line-height: $height + 22px;
+    // line-height: $height + 22px;
     font-weight: bold;
     border-radius: 3px;
     color: white;
