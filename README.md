@@ -13,10 +13,18 @@ by Robert Lord and Flo Wong
     ```
     compass watch
     ```
-
+    Once complete, exit the task.
+    ```
+    Ctrl+C
+    ```
+    
 3. Run Webpack for Javascript.
     ```
     webpack --watch src/game.js game.js
     ```
-
-4. Open index.html.
+    Once complete, exit the task.
+    ```
+    Ctrl+C
+    ```
+    
+4. Open index.html to view and play the game!
