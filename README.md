@@ -6,7 +6,7 @@ by Robert Lord and Flo Wong
 
 ## Preview
 
-![Logic Blocks: Stage 1](/relative/path/to/img/img.jpg?raw=true "Logic Blocks: Stage 1")
+![Logic Blocks: Stage 1](screenshots/stage-1.png?raw=true "Logic Blocks: Stage 1")
 
 ## To install
 
