@@ -76,6 +76,7 @@ Player.prototype.turn = function(stage, x, y, world, input) { // input is keyCod
     // temporary "winning" message
     stage.winMessage("Congrats! You've escaped the trappings of society. Now you have another society to worry about!");
   }
+
 }
 
 module.exports = Player;
