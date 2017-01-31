@@ -4,6 +4,9 @@ by Robert Lord and Flo Wong
 
 *Experimenting with Javascript to create a web-based puzzle game*
 
+## Preview
+
+![Logic Blocks: Stage 1](/relative/path/to/img/img.jpg?raw=true "Logic Blocks: Stage 1")
 
 ## To install
 
