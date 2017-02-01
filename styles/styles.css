@@ -148,20 +148,19 @@ h1.title {
   text-transform: uppercase;
   width: 270px; }
 
-/* line 69, ../sass/styles.scss */
-.stage-info-container {
-  width: 100px;
-  display: inline-block; }
+/* line 65, ../sass/styles.scss */
+.stage-container {
+  width: 270px; }
 
-/* line 74, ../sass/styles.scss */
+/* line 71, ../sass/styles.scss */
+.stage-info-container {
+  display: block; }
+
+/* line 81, ../sass/styles.scss */
 .reset-container {
-  width: 100px;
-  display: inline-block;
-  float: right;
-  text-align: right; }
-  /* line 81, ../sass/styles.scss */
+  display: block; }
+  /* line 89, ../sass/styles.scss */
   .reset-container #reset-stage {
-    position: relative;
     float: right;
     background: #9bc1bc;
     padding: 15px 25px;
@@ -196,12 +195,12 @@ h1.title {
 }
 
 */
-/* line 122, ../sass/styles.scss */
+/* line 129, ../sass/styles.scss */
 .game-board canvas {
   margin: 30px auto;
   border-radius: 8px; }
 
-/* line 128, ../sass/styles.scss */
+/* line 135, ../sass/styles.scss */
 .stage-name {
   font-style: bold;
   color: #ed6a5a; }

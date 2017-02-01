@@ -64,22 +64,29 @@ h1.title {
 
 .stage-container {
   //display: inline-block;
+  //position: relative;
+  width: $game-container-width;
 }
 
 .stage-info-container {
-  width: 100px;
-  display: inline-block;
+  //width: 100px;
+  display: block;
+  //position: absolute;
+}
+
+.instructions {
+  //display: inline;
 }
 
 .reset-container {
-  width: 100px;
-  display: inline-block;
-  float: right;
-  text-align: right;
+  //width: 100px;
+  display: block;
+  //float: right;
   $height: 25px;
+  //position: absolute;
+  //right: 0;
 
   #reset-stage {
-    position: relative;
     float: right;
     background: $game-container-background;
     padding: 15px 25px;
