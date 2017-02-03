@@ -1,6 +1,7 @@
 var C = require('./constants');
 var stage = require('./stage');
 var randInt = require('./functions').randInt;
+var rando_count;
 
 function Rando() {
 }
@@ -20,14 +21,19 @@ Rando.prototype.turn = function(stage, x, y, world, input) {
     stage.grid[x][y] = null;
 
     if (world.stage_count === 2) {
+      rando_count = 0;
       for (var i = 0; i < stage.width; i++) {
         for (var j = 0; j < stage.height; j++) {
 
           if (stage.isObject(i, j, Rando)) {
+            rando_count++;
             console.log('there are still randos');
           }
           // *DO LATER: have some sort of winning stage measure here
         }
+      }
+      if (rando_count === 0) {
+        console.log('no randos left, you won');
       }
     }
   }

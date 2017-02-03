@@ -478,6 +478,7 @@
 	var C = __webpack_require__(1);
 	var stage = __webpack_require__(7);
 	var randInt = __webpack_require__(9).randInt;
+	var rando_count;
 
 	function Rando() {
 	}
@@ -497,14 +498,19 @@
 	    stage.grid[x][y] = null;
 
 	    if (world.stage_count === 2) {
+	      rando_count = 0;
 	      for (var i = 0; i < stage.width; i++) {
 	        for (var j = 0; j < stage.height; j++) {
 
 	          if (stage.isObject(i, j, Rando)) {
+	            rando_count++;
 	            console.log('there are still randos');
 	          }
 	          // *DO LATER: have some sort of winning stage measure here
 	        }
+	      }
+	      if (rando_count === 0) {
+	        console.log('no randos left, you won');
 	      }
 	    }
 	  }
@@ -592,7 +598,7 @@
 	    },
 	    {
 	      title: 'Trap Randos',
-	      instr: "Trap the randomly moving creatures in a specific area that isn't implemented yet, therefore is impossible to complete.",
+	      instr: "Whoa! There are other creatures in this world. Let's see what happens when we suffocate them.",
 	      has_rando: true,
 	      has_finish: false
 	    }

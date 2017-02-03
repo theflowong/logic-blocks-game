@@ -17,7 +17,7 @@ function World() {
     },
     {
       title: 'Trap Randos',
-      instr: "Trap the randomly moving creatures in a specific area that isn't implemented yet, therefore is impossible to complete.",
+      instr: "Whoa! There are other creatures in this world. Let's see what happens when we suffocate them.",
       has_rando: true,
       has_finish: false
     }
