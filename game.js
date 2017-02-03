@@ -510,7 +510,8 @@
 	        }
 	      }
 	      if (rando_count === 0) {
-	        console.log('no randos left, you won');
+	        console.log("there aren't any randos left... i guess you've won.");
+	        //stage.winMessage("Well, this is the game of life, and you've won.");
 	      }
 	    }
 	  }
