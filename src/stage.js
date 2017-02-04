@@ -173,7 +173,9 @@ Stage.prototype.winMessage = function(str) {
   // THINK more about how this is set up
   var world = this.world;
   setTimeout(function() {
-    world.nextStage(); // move on to next level
+    if (world.hasNextStage()) {
+      world.nextStage();
+    }
     alert(str);
   }, 300);
   // track any points/progress/endgame

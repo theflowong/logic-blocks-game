@@ -33,8 +33,7 @@ Rando.prototype.turn = function(stage, x, y, world, input) {
         }
       }
       if (rando_count === 0) {
-        console.log("there aren't any randos left... i guess you've won.");
-        //stage.winMessage("Well, this is the game of life, and you've won.");
+        stage.winMessage("No more creatures are left, so I guess you've won.");
       }
     }
   }

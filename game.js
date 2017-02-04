@@ -59,7 +59,7 @@
 
 	const Player = __webpack_require__(6);
 	const Stage = __webpack_require__(7);
-	const World = __webpack_require__(10);
+	const World = __webpack_require__(8);
 
 
 	var world = new World();
@@ -289,11 +289,11 @@
 	var Wall = __webpack_require__(2);
 	var Block = __webpack_require__(3);
 	var BlackHole = __webpack_require__(4);
-	var Rando = __webpack_require__(8);
+	var Rando = __webpack_require__(9);
 	var Finish = __webpack_require__(5);
 	var Player = __webpack_require__(6);
-	var randInt = __webpack_require__(9).randInt;
-	var adj = __webpack_require__(9).adj;
+	var randInt = __webpack_require__(10).randInt;
+	var adj = __webpack_require__(10).adj;
 
 	// *Question. SHOULD THIS BE GLOBAL?
 	// used to be function of World.prototype, and called through nextStage.
@@ -460,7 +460,9 @@
 	  // THINK more about how this is set up
 	  var world = this.world;
 	  setTimeout(function() {
-	    world.nextStage(); // move on to next level
+	    if (world.hasNextStage()) {
+	      world.nextStage();
+	    }
 	    alert(str);
 	  }, 300);
 	  // track any points/progress/endgame
@@ -476,8 +478,64 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var C = __webpack_require__(1);
+	var Stage = __webpack_require__(7);
+
+	function World() {
+	  this.stage_config = [
+	    {
+	      title: 'Escape to Finish',
+	      instr: 'Escape the board! Hint: look at the border.',
+	      has_rando: false,
+	      has_finish: true
+	    },
+	    {
+	      title: 'Push Blocks into BlackHoles',
+	      instr: 'Vanish a BlackHole. Hint: try some pushing some stuff into each other.',
+	      has_rando: false,
+	      has_finish: false
+	    },
+	    {
+	      title: 'Trap Randos',
+	      instr: "Whoa! There are other creatures in this world. Let's see what happens when we suffocate them.",
+	      has_rando: true,
+	      has_finish: false
+	    }
+	  ];
+	  this.stage_count = 0;
+	  this.stage = new Stage(C.canvas.width/C.SCALE, C.canvas.height/C.SCALE, this, this.stage_config[this.stage_count]);
+	}
+	World.prototype.turn = function(input) {
+	  this.stage.turn(this, input);
+	}
+	World.prototype.draw = function(ctx) {
+	  this.stage.draw(ctx);
+	}
+	World.prototype.resetStage = function() {
+	  // *Question. Should resetStage function be in World? i think so, but check when not sleep deprived hehhe.
+	  this.stage = new Stage(C.canvas.width/C.SCALE, C.canvas.height/C.SCALE, this, this.stage_config[this.stage_count]);
+	}
+	World.prototype.hasNextStage = function() {
+	  var has_next_stage = ((this.stage_count+1) < this.stage_config.length);
+	  console.log('has_next_stage', has_next_stage);
+	  return has_next_stage;
+	}
+	World.prototype.nextStage = function() {
+	  this.stage_count++;
+	  var stg_config = this.stage_config[this.stage_count];
+	  this.stage = new Stage(C.canvas.width/C.SCALE, C.canvas.height/C.SCALE, this, stg_config);
+	  // *DO LATER: possibly replace ^above with resetStage function? for efficiency. experiment more.
+	}
+
+	module.exports = World;
+
+
+/***/ },
+/* 9 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var C = __webpack_require__(1);
 	var stage = __webpack_require__(7);
-	var randInt = __webpack_require__(9).randInt;
+	var randInt = __webpack_require__(10).randInt;
 	var rando_count;
 
 	function Rando() {
@@ -510,8 +568,7 @@
 	        }
 	      }
 	      if (rando_count === 0) {
-	        console.log("there aren't any randos left... i guess you've won.");
-	        //stage.winMessage("Well, this is the game of life, and you've won.");
+	        stage.winMessage("No more creatures are left, so I guess you've won.");
 	      }
 	    }
 	  }
@@ -552,7 +609,7 @@
 
 
 /***/ },
-/* 9 */
+/* 10 */
 /***/ function(module, exports) {
 
 	function randInt(low, high) {
@@ -574,57 +631,6 @@
 	}
 
 	module.exports = {randInt, adj};
-
-
-/***/ },
-/* 10 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var C = __webpack_require__(1);
-	var Stage = __webpack_require__(7);
-
-	function World() {
-	  this.stage_config = [
-	    {
-	      title: 'Escape to Finish',
-	      instr: 'Escape the board! Hint: look at the border.',
-	      has_rando: false,
-	      has_finish: true
-	    },
-	    {
-	      title: 'Push Blocks into BlackHoles',
-	      instr: 'Vanish a BlackHole. Hint: try some pushing some stuff into each other.',
-	      has_rando: false,
-	      has_finish: false
-	    },
-	    {
-	      title: 'Trap Randos',
-	      instr: "Whoa! There are other creatures in this world. Let's see what happens when we suffocate them.",
-	      has_rando: true,
-	      has_finish: false
-	    }
-	  ];
-	  this.stage_count = 0;
-	  this.stage = new Stage(C.canvas.width/C.SCALE, C.canvas.height/C.SCALE, this, this.stage_config[this.stage_count]);
-	}
-	World.prototype.turn = function(input) {
-	  this.stage.turn(this, input);
-	}
-	World.prototype.draw = function(ctx) {
-	  this.stage.draw(ctx);
-	}
-	World.prototype.resetStage = function() {
-	  // *Question. Should resetStage function be in World? i think so, but check when not sleep deprived hehhe.
-	  this.stage = new Stage(C.canvas.width/C.SCALE, C.canvas.height/C.SCALE, this, this.stage_config[this.stage_count]);
-	}
-	World.prototype.nextStage = function() {
-	  this.stage_count++;
-	  var stg_config = this.stage_config[this.stage_count];
-	  this.stage = new Stage(C.canvas.width/C.SCALE, C.canvas.height/C.SCALE, this, stg_config);
-	  // *DO LATER: possibly replace ^above with resetStage function? for efficiency. experiment more.
-	}
-
-	module.exports = World;
 
 
 /***/ }

@@ -35,6 +35,11 @@ World.prototype.resetStage = function() {
   // *Question. Should resetStage function be in World? i think so, but check when not sleep deprived hehhe.
   this.stage = new Stage(C.canvas.width/C.SCALE, C.canvas.height/C.SCALE, this, this.stage_config[this.stage_count]);
 }
+World.prototype.hasNextStage = function() {
+  var has_next_stage = ((this.stage_count+1) < this.stage_config.length);
+  console.log('has_next_stage', has_next_stage);
+  return has_next_stage;
+}
 World.prototype.nextStage = function() {
   this.stage_count++;
   var stg_config = this.stage_config[this.stage_count];
