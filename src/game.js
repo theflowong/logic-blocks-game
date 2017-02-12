@@ -45,6 +45,7 @@ else if (reset_button.attachEvent) {
 // get input (key code)
 window.addEventListener('keydown', function(event) {
   world.turn(event.keyCode);
+  event.preventDefault();
 })
 
 // draw game
