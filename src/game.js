@@ -40,8 +40,6 @@ else if (reset_button.attachEvent) {
 
 /* --------------------- GAME -------------------- */
 
-// *Question. this whole StartMainMenu design
-
 // get input (key code)
 window.addEventListener('keydown', function(event) {
   world.turn(event.keyCode);
