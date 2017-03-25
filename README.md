@@ -8,20 +8,20 @@ by Robert Lord and Flo Wong
 
 ![Logic Blocks: Stage 1](screenshots/stage-1.png?raw=true "Logic Blocks: Stage 1")
 
-## To install
+## How to Install and Play Locally
 
-1. Clone repo, and enter the folder through the command line.
+1. Clone repo and download files, and enter folder locally through the command line.
 
-2. Run Sass for styles.
+2. Use Compass to watch for Sass style changes.
     ```
     compass watch
     ```
-    Once complete, exit the task.
+    Once css/styles.css has been written, exit the task.
     ```
     Ctrl+C
     ```
-    
-3. Run Webpack for Javascript.
+
+3. Run Webpack for Javascript files.
     ```
     webpack --watch src/game.js game.js
     ```
@@ -29,5 +29,5 @@ by Robert Lord and Flo Wong
     ```
     Ctrl+C
     ```
-    
+
 4. Open index.html to view and play the game!
