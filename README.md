@@ -1,6 +1,6 @@
 # game: Logic Block Puzzles
 
-by Robert Lord and Flo Wong
+by Flo Wong and Robert Lord
 
 *Experimenting with Javascript to create a web-based puzzle game*
 
